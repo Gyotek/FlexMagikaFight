@@ -107,4 +107,19 @@ public class BossBehavior : MonoBehaviour
     {
         //Find a spell property on a mage and add it to the "targets" list
     }
+
+    public void TakeDamage(float damage, SpellManager.SpellElement spellElement)
+    {
+        switch (spellElement)
+        {
+            case SpellManager.SpellElement.Fire:
+                switch (bossElement)
+                {
+                    case SpellManager.SpellElement.Fire:
+                        damage *= 1;
+                        break;
+                }
+                break;
+        }
+    }
 }

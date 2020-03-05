@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New BossPattern", menuName = "BossPattern")]
 public class BossPattern : ScriptableObject
 {
-    public int patternID;
     public BossBehavior.BossPhase bossPhase;
 
     public int addsNumber;
