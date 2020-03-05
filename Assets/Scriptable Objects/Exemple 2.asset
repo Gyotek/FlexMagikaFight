@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01652ad6a6ac48e48adcffd26dc2ab14, type: 3}
-  m_Name: Exemple
+  m_Name: Exemple 2
   m_EditorClassIdentifier: 
   patternID: 0
   bossPhase: 1

@@ -44,6 +44,13 @@ public class TurnSystem : MonoBehaviour
     [HideInInspector]
     public float realTurnTime;
 
+    [SerializeField]
+    private GameEvent onNextTurn;
+    [SerializeField]
+    private GameEvent onBossTurnStart;
+    [SerializeField]
+    private GameEvent onPlayerTurnStart;
+
     private void Update()
     {
         realTurnTime -= Time.deltaTime;
@@ -58,18 +65,23 @@ public class TurnSystem : MonoBehaviour
 
     public void NextTurn()
     {
+        onNextTurn.Raise();
+
         if(turnOwner == TurnOwner.Player)
         {
+            onBossTurnStart.Raise();
             turnOwner = TurnOwner.Boss;
             realTurnTime = bossTurnTime;
 
             turnOwnerText.text = "Boss Turn!";
             animator.SetTrigger("Boss' Turn");
+
             //Disable Player's controls
             //Cast the spell
         }
         else if(turnOwner == TurnOwner.Boss)
         {
+            onPlayerTurnStart.Raise();
             turnOwner = TurnOwner.Player;
             realTurnTime = playerTurnTime;
             turnCount++;

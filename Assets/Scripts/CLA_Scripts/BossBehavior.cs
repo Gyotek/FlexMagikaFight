@@ -23,23 +23,82 @@ public class BossBehavior : MonoBehaviour
 
 
     //Variables
+    public GameObject wall;
+
     public float maxHealth;
     [HideInInspector]
     public float realHealth;
-    public int damage;
 
-    public ScriptableObject currentBossPattern;
+    private int damage;
+    private SpellManager.SpellElement bossElement;
+    private int addsNumber;
+    private SpellManager.SpellElement addsElement;
+    private int wallNumber;
+    private bool addsMoving;
+    private bool wallsMoving;
+
+    public BossPattern currentBossPattern;
+    public List<BossPattern> bossPatterns;
 
     public enum BossPhase
     {
-        Phase1 = 0,
-        Phase2 = 1,
-        Phase3 = 2,
-        Error
+        Phase1 = 1,
+        Phase2 = 2,
+        Phase3 = 3,
+        Error = 0
     }
-    public BossPhase realBossPhase = BossPhase.Phase1;
+    public BossPhase currentBossPhase = BossPhase.Phase1;
 
     private List<GameObject> targets;
+    private List<GameObject> newWalls = new List<GameObject>();
+
+    private void Start()
+    {
+        GetPattern();
+        LoadBossPattern();
+        ApplyPattern();
+    }
+
+    private void GetPattern()
+    {
+        switch (currentBossPhase)
+        {
+            case BossPhase.Phase1:
+                currentBossPattern = bossPatterns[Random.Range(0, 3)];
+                break;
+            case BossPhase.Phase2:
+                currentBossPattern = bossPatterns[Random.Range(3, 6)];
+                break;
+            case BossPhase.Phase3:
+                currentBossPattern = bossPatterns[Random.Range(6, 9)];
+                break;
+        }
+    }
+
+    private void LoadBossPattern()
+    {
+        damage = currentBossPattern.damage;
+        bossElement = currentBossPattern.bossElement;
+        addsNumber = currentBossPattern.addsNumber;
+        addsElement = currentBossPattern.addsElement;
+        wallNumber = currentBossPattern.wallNumber;
+        addsMoving = currentBossPattern.addsMoving;
+        wallsMoving = currentBossPattern.wallsMoving;
+    }
+
+    private void ApplyPattern()
+    {
+        //Change Boss' skin
+        //Spawn Adds
+        //Change their Element
+        for (int i = 0; i < wallNumber; i++)
+        {
+            newWalls.Add(Instantiate(wall));
+            newWalls[i].GetComponent<WallBehavior>().canMove = wallsMoving;
+        }
+
+        //State if Adds can move
+    }
 
     public void BossLockTarget()
     {

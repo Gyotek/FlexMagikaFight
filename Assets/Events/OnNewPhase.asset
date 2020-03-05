@@ -9,15 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01652ad6a6ac48e48adcffd26dc2ab14, type: 3}
-  m_Name: Exemple
+  m_Script: {fileID: 11500000, guid: 3218a481667b6284db148e10f6e38469, type: 3}
+  m_Name: OnNewPhase
   m_EditorClassIdentifier: 
-  patternID: 0
-  bossPhase: 1
-  addsNumber: 1
-  wallNumber: 1
-  damage: 1
-  bossElement: 0
-  addsElement: 0
-  addsMoving: 1
-  wallsMoving: 0
