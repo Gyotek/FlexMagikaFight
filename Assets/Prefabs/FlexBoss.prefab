@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8115902417654151437}
   - component: {fileID: 8115902417654151438}
   - component: {fileID: 8115902417654151436}
+  - component: {fileID: 1014613914}
+  - component: {fileID: 1014613915}
   m_Layer: 0
   m_Name: FlexBoss
   m_TagString: Untagged
@@ -98,3 +100,48 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &1014613914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115902417654151439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664c1657f66f7e14089d9ff7d2b75369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c0ec1dc9bef3dd446b69b1eba1a0c570, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1014613915}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1014613915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115902417654151439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d496517d856ab1489576e152bb20885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wall: {fileID: 6545711886994241242, guid: d8f6058f38c1c6c4bb40138b13bb2d6a, type: 3}
+  maxHealth: 0
+  realHealth: 0
+  currentBossPattern: {fileID: 0}
+  bossPatterns: []
+  currentBossPhase: 1

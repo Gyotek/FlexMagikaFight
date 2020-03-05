@@ -1120,6 +1120,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1367cd031b8096a47a5dbc33c05bfd8d,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f258ee441a11634ba5983a43f072e31,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 457245e365a30d04f9fac3960330cca3,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: b5bf2899d9784774e89a0981c4a1a9ae,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 002287ace91de0743bfa3f266f376255,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4198bb1f3945fe848ad4ab51301a1483,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e594b12a2d47b54b9d62374e052fdd3,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3de2d7f48c0649d42a8b7c0e39467b4b,
+        type: 2}
+    - target: {fileID: 1014613915, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
+      propertyPath: bossPatterns.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c9f4124dbcb7c54891246f38679a58d,
+        type: 2}
     - target: {fileID: 8115902417654151437, guid: d8884887c076b5d4ba3d7b016a22d850,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1182,55 +1231,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
---- !u!1 &1014613913 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8115902417654151439, guid: d8884887c076b5d4ba3d7b016a22d850,
-    type: 3}
-  m_PrefabInstance: {fileID: 1014613912}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1014613914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014613913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 664c1657f66f7e14089d9ff7d2b75369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: c0ec1dc9bef3dd446b69b1eba1a0c570, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1014613915}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1014613915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014613913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d496517d856ab1489576e152bb20885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
-  realHealth: 0
-  currentBossPattern: {fileID: 0}
-  currentBossPhase: 0
 --- !u!1 &1223727454
 GameObject:
   m_ObjectHideFlags: 0

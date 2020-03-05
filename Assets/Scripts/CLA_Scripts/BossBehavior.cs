@@ -50,6 +50,7 @@ public class BossBehavior : MonoBehaviour
     public BossPhase currentBossPhase = BossPhase.Phase1;
 
     private List<GameObject> targets;
+    private List<GameObject> newWalls = new List<GameObject>();
 
     private void Start()
     {
@@ -90,10 +91,13 @@ public class BossBehavior : MonoBehaviour
         //Change Boss' skin
         //Spawn Adds
         //Change their Element
-        var newWall = Instantiate(wall);
+        for (int i = 0; i < wallNumber; i++)
+        {
+            newWalls.Add(Instantiate(wall));
+            newWalls[i].GetComponent<WallBehavior>().canMove = wallsMoving;
+        }
 
         //State if Adds can move
-        newWall.GetComponent<WallBehavior>().canMove = wallsMoving;
     }
 
     public void BossLockTarget()
