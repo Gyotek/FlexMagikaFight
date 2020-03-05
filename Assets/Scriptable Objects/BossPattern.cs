@@ -6,13 +6,13 @@ using UnityEngine;
 public class BossPattern : ScriptableObject
 {
     public int patternID;
-    public int bossphase;
+    public BossBehavior.BossPhase bossPhase;
 
     public int addsNumber;
     public int wallNumber;
     public int damage;
-    public int bossElement; //0 = Fire, 1 = Water, 2 = Plant
-    public int addsElement; //0 = Fire, 1 = Water, 2 = Plant
+    public SpellManager.SpellElement bossElement;
+    public SpellManager.SpellElement addsElement;
 
     public bool addsMoving;
     public bool wallsMoving;

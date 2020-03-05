@@ -26,20 +26,39 @@ public class BossBehavior : MonoBehaviour
     public float maxHealth;
     [HideInInspector]
     public float realHealth;
-    public int damage;
 
-    public ScriptableObject currentBossPattern;
+    private int damage;
+    private SpellManager.SpellElement bossElement;
+    private int addsNumber;
+    private SpellManager.SpellElement addsElement;
+    private int wallNumber;
+    private bool addsMoving;
+    private bool wallsMoving;
+
+    public BossPattern currentBossPattern;
 
     public enum BossPhase
     {
-        Phase1 = 0,
-        Phase2 = 1,
-        Phase3 = 2,
-        Error
+        Phase1 = 1,
+        Phase2 = 2,
+        Phase3 = 3,
+        Error = 0
     }
-    public BossPhase realBossPhase = BossPhase.Phase1;
+    public BossPhase currentBossPhase = BossPhase.Phase1;
 
     private List<GameObject> targets;
+
+    private void LoadBossPattern()
+    {
+        damage = currentBossPattern.damage;
+        bossElement = currentBossPattern.bossElement;
+        addsNumber = currentBossPattern.addsNumber;
+        addsElement = currentBossPattern.addsElement;
+        wallNumber = currentBossPattern.wallNumber;
+        addsMoving = currentBossPattern.addsMoving;
+        wallsMoving = currentBossPattern.wallsMoving;
+    }
+
 
     public void BossLockTarget()
     {

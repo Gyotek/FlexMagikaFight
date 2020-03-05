@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3218a481667b6284db148e10f6e38469, type: 3}
-  m_Name: OnEndTurn
+  m_Name: OnNewPhase
   m_EditorClassIdentifier: 
