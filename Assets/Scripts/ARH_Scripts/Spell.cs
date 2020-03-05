@@ -83,6 +83,6 @@ public class Spell : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
 
-        //if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<AddBehavior>())
+        //if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<>())
     }
 }
