@@ -16,6 +16,9 @@ public class SpellManager : MonoBehaviour
     SpelZone actualZone = default;
     SpellType actualType = default;
 
+    [SerializeField] Transform spellLauncherPos;
+    [SerializeField] bool isAiming = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +28,22 @@ public class SpellManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SpellAiming(spellLauncherPos.position);
+    }
 
+    void SpellAiming(Vector2 pos)
+    {
+        if (!isAiming) return;
+
+        Vector2 mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        Vector2 dir = (mousePos - pos);
+        Debug.DrawRay(pos, pos + dir * 100, Color.blue);
+
+    }
+
+    void LaunchSpell()
+    {
+        Debug.Log(actualElement + " + " + actualZone + " + " + actualType);
     }
 
     public void SetSpellParameter(Text text)
@@ -76,6 +94,5 @@ public class SpellManager : MonoBehaviour
     public void SetSpellParameter(SpellType parameter)
     {
         actualType = parameter;
-        Debug.Log(actualElement + " + " + actualZone + " + " + actualType);
     }
 }
