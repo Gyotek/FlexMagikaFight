@@ -94,6 +94,7 @@ public class Spell : MonoBehaviour
                 damage *= 0.5f;
                 break;
         }
+        cible.GetComponent<BossBehavior>().TakeDamage(damage, SpellManager.instance.actualElement);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
