@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3478349876065522141}
   - component: {fileID: 3839079595026005731}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "T\xEAte"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,13 +91,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8550574992523071432}
   - component: {fileID: 601405942515356076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "Train\xE9e"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8550574992523071432
 Transform:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 1941601088670486359}
   - component: {fileID: 1941601088670486358}
   - component: {fileID: 1941601088670486357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,8 +212,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 21c8079fdad19b74b94009577e78dde0, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -248,4 +248,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1941601088670486359}
   tr: {fileID: 3245292707064028009}
-  spellSpeed: 1
+  sprite: {fileID: 3839079595026005731}
+  spellSpeed: 0.8

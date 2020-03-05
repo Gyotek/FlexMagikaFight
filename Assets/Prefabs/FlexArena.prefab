@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9139803955039627715}
   - component: {fileID: 9098545039770139518}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7870907076023014628}
   - component: {fileID: 7870907076023014629}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FlexArena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
