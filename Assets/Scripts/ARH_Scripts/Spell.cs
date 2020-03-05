@@ -9,6 +9,10 @@ public class Spell : MonoBehaviour
     [SerializeField] SpriteRenderer sprite = default;
     [SerializeField] private float spellSpeed = 4;
 
+    public bool isCircle = false;
+    public bool isPerforant = false;
+    public PhysicsMaterial2D bounce = default;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,34 @@ public class Spell : MonoBehaviour
                 break;
             case SpellManager.SpellElement.Plant:
                 sprite.color = Color.green;
+                break;
+            default:
+                break;
+        }
+
+        switch (SpellManager.instance.actualZone)
+        {
+            case SpellManager.SpellZone.Circle:
+                isCircle = true;
+                break;
+            case SpellManager.SpellZone.Line:
+                break;
+            case SpellManager.SpellZone.Multiple:
+                break;
+            default:
+                break;
+        }
+
+        switch (SpellManager.instance.actualType)
+        {
+            case SpellManager.SpellType.Bounce:
+                rb.sharedMaterial = bounce;
+                break;
+            case SpellManager.SpellType.Impact:
+                transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f, transform.localScale.z);
+                break;
+            case SpellManager.SpellType.Perforant:
+                isPerforant = true;
                 break;
             default:
                 break;
@@ -50,5 +82,7 @@ public class Spell : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
         }
+
+        //if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<AddBehavior>())
     }
 }
