@@ -20,6 +20,7 @@ public class SpellManager : SerializedMonoBehaviour
     [SerializeField] Transform spellLauncher;
     [SerializeField] bool isAiming = true;
     [SerializeField] GameObject spellPrefab = default;
+    [SerializeField] float multipleLaunchDelay = 1.5f;
 
     public Dictionary<Image, SpellElement> ElementsCurseurs = new Dictionary<Image, SpellElement>();
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
@@ -61,7 +62,10 @@ public class SpellManager : SerializedMonoBehaviour
 
         Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
         Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
-        isAiming = true;
+        if (actualZone == SpellZone.Multiple)
+        {
+            StartCoroutine(SecondMultipleLaunch(pos));
+        }
     }
 
     SpellElement ElementChecker()
@@ -146,5 +150,17 @@ public class SpellManager : SerializedMonoBehaviour
     public void SetSpellParameter(SpellType parameter)
     {
         actualType = parameter;
+    }
+
+    IEnumerator SecondMultipleLaunch(Vector2 pos)
+    {
+        yield return new WaitForSeconds(multipleLaunchDelay);
+        Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
+        StartCoroutine(ThirdMultipleLaunch(pos));
+    }
+    IEnumerator ThirdMultipleLaunch(Vector2 pos)
+    {
+        yield return new WaitForSeconds(multipleLaunchDelay);
+        Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
     }
 }

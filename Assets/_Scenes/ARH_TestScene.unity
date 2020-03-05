@@ -422,6 +422,7 @@ MonoBehaviour:
   isAiming: 1
   spellPrefab: {fileID: 4314327492567523877, guid: bb0b2d86778c0954aa4b85cba715cdf6,
     type: 3}
+  multipleLaunchDelay: 0.5
 --- !u!1001 &1286748395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2956,6 +2957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.SerializationNodes.Array.data[41].Data
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850782767762153142, guid: 9003b1026071d6349b213ce04f7e690f,
+        type: 3}
+      propertyPath: multipleLaunchDelay
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1850782767762153143, guid: 9003b1026071d6349b213ce04f7e690f,
         type: 3}

@@ -10,8 +10,11 @@ public class Spell : MonoBehaviour
     [SerializeField] private float spellSpeed = 4;
 
     public bool isCircle = false;
+    [SerializeField] GameObject circle = default;
     public bool isPerforant = false;
+    public bool isBouncing = false;
     public PhysicsMaterial2D bounce = default;
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,9 +70,30 @@ public class Spell : MonoBehaviour
         rb.AddForce(dir * spellSpeed * 100);
     }
 
-    void FixedUpdate()
+    void MakeDamage(Transform cible)
     {
-
+        float damage = 0;
+        switch (SpellManager.instance.actualType)
+        {
+            case SpellManager.SpellType.Bounce:
+                damage = 3;
+                break;
+            case SpellManager.SpellType.Impact:
+                damage = 2;
+                break;
+            case SpellManager.SpellType.Perforant:
+                damage = 4;
+                break;
+        }
+        switch (SpellManager.instance.actualZone)
+        {
+            case SpellManager.SpellZone.Line:
+                damage *= 2;
+                break;
+            case SpellManager.SpellZone.Multiple:
+                damage *= 0.5f;
+                break;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -78,11 +102,27 @@ public class Spell : MonoBehaviour
         {
             rb.sharedMaterial = null;
         }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
 
-        //if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<>())
+        if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<AddBehavior>())
+        {
+            Transform cible = collision.transform;
+            if (isPerforant)
+            {
+                isPerforant = false;
+                return;
+            }
+            
+            if (isCircle)
+            {
+                isCircle = false;
+                circle.SetActive(true);
+            }
+
+            MakeDamage(cible);
+            if (!isBouncing)
+                Destroy(this.gameObject);
+            else
+                isBouncing = false;
+        }
     }
 }
