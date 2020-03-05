@@ -55,6 +55,7 @@ public class BossBehavior : MonoBehaviour
 
     private void Start()
     {
+        realHealth = maxHealth;
         GetPattern();
         LoadBossPattern();
         ApplyPattern();
@@ -118,8 +119,43 @@ public class BossBehavior : MonoBehaviour
                     case SpellManager.SpellElement.Fire:
                         damage *= 1;
                         break;
+                    case SpellManager.SpellElement.Plant:
+                        damage *= 2;
+                        break;
+                    case SpellManager.SpellElement.Water:
+                        damage *= 0;
+                        break;
+                }
+                break;
+            case SpellManager.SpellElement.Plant:
+                switch (bossElement)
+                {
+                    case SpellManager.SpellElement.Fire:
+                        damage *= 0;
+                        break;
+                    case SpellManager.SpellElement.Plant:
+                        damage *= 1;
+                        break;
+                    case SpellManager.SpellElement.Water:
+                        damage *= 2;
+                        break;
+                }
+                break;
+            case SpellManager.SpellElement.Water:
+                switch (bossElement)
+                {
+                    case SpellManager.SpellElement.Fire:
+                        damage *= 2;
+                        break;
+                    case SpellManager.SpellElement.Plant:
+                        damage *= 0;
+                        break;
+                    case SpellManager.SpellElement.Water:
+                        damage *= 1;
+                        break;
                 }
                 break;
         }
+        realHealth -= damage;
     }
 }
