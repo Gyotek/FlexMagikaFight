@@ -10,7 +10,6 @@ public class BossPattern : ScriptableObject
 
     public int addsNumber;
     public int wallNumber;
-    public int damage;
     public SpellManager.SpellElement bossElement;
     public SpellManager.SpellElement addsElement;
 

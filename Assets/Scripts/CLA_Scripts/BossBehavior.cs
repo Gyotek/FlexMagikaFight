@@ -24,12 +24,12 @@ public class BossBehavior : MonoBehaviour
 
     //Variables
     public GameObject wall;
+    public GameObject add;
 
     public float maxHealth;
     [HideInInspector]
     public float realHealth;
 
-    private int damage;
     private SpellManager.SpellElement bossElement;
     private int addsNumber;
     private SpellManager.SpellElement addsElement;
@@ -50,6 +50,7 @@ public class BossBehavior : MonoBehaviour
     public BossPhase currentBossPhase = BossPhase.Phase1;
 
     private List<GameObject> targets;
+    private List<GameObject> newAdds = new List<GameObject>();
     private List<GameObject> newWalls = new List<GameObject>();
 
     private void Start()
@@ -77,7 +78,6 @@ public class BossBehavior : MonoBehaviour
 
     private void LoadBossPattern()
     {
-        damage = currentBossPattern.damage;
         bossElement = currentBossPattern.bossElement;
         addsNumber = currentBossPattern.addsNumber;
         addsElement = currentBossPattern.addsElement;
@@ -89,22 +89,22 @@ public class BossBehavior : MonoBehaviour
     private void ApplyPattern()
     {
         //Change Boss' skin
-        //Spawn Adds
-        //Change their Element
+
+        for (int i = 0; i < addsNumber; i++)
+        {
+            newAdds.Add(Instantiate(add));
+            newAdds[i].GetComponent<AddBehavior>().canMove = addsMoving;
+            newAdds[i].GetComponent<AddBehavior>().element = addsElement;
+        }
         for (int i = 0; i < wallNumber; i++)
         {
             newWalls.Add(Instantiate(wall));
             newWalls[i].GetComponent<WallBehavior>().canMove = wallsMoving;
         }
-
-        //State if Adds can move
     }
 
     public void BossLockTarget()
     {
-        for (int i = 0; i < damage; i++)
-        {
-            //Find a spell property on a mage and add it to the "targets" list
-        }
+        //Find a spell property on a mage and add it to the "targets" list
     }
 }
