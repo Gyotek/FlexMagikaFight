@@ -17,11 +17,17 @@ public class WallBehavior : MonoBehaviour
         spawners.Add(GameObject.Find("Spawner2").transform);
     }
 
-    private void Update()
+
+    private void Start()
+    {
+        SwitchPos();
+    }
+
+    /*private void Update()
     {
         if(Input.GetKeyDown("t"))
         { SwitchPos(); }
-    }
+    }*/
 
     public void SwitchPos()
     {

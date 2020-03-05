@@ -23,6 +23,8 @@ public class BossBehavior : MonoBehaviour
 
 
     //Variables
+    public GameObject wall;
+
     public float maxHealth;
     [HideInInspector]
     public float realHealth;
@@ -36,6 +38,7 @@ public class BossBehavior : MonoBehaviour
     private bool wallsMoving;
 
     public BossPattern currentBossPattern;
+    public List<BossPattern> bossPatterns;
 
     public enum BossPhase
     {
@@ -48,6 +51,29 @@ public class BossBehavior : MonoBehaviour
 
     private List<GameObject> targets;
 
+    private void Start()
+    {
+        GetPattern();
+        LoadBossPattern();
+        ApplyPattern();
+    }
+
+    private void GetPattern()
+    {
+        switch (currentBossPhase)
+        {
+            case BossPhase.Phase1:
+                currentBossPattern = bossPatterns[Random.Range(0, 3)];
+                break;
+            case BossPhase.Phase2:
+                currentBossPattern = bossPatterns[Random.Range(3, 6)];
+                break;
+            case BossPhase.Phase3:
+                currentBossPattern = bossPatterns[Random.Range(6, 9)];
+                break;
+        }
+    }
+
     private void LoadBossPattern()
     {
         damage = currentBossPattern.damage;
@@ -59,6 +85,16 @@ public class BossBehavior : MonoBehaviour
         wallsMoving = currentBossPattern.wallsMoving;
     }
 
+    private void ApplyPattern()
+    {
+        //Change Boss' skin
+        //Spawn Adds
+        //Change their Element
+        var newWall = Instantiate(wall);
+
+        //State if Adds can move
+        newWall.GetComponent<WallBehavior>().canMove = wallsMoving;
+    }
 
     public void BossLockTarget()
     {
