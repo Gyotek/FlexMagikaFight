@@ -27,12 +27,22 @@ public class WallBehavior : MonoBehaviour
     {
         if (canMove)
         {
-            var spawner = 0;
-            while (!spawners[spawner].gameObject.GetComponent<Spawner>().taken)
+            for (int i = 0; i < spawners.Count; i++)
             {
-                spawner = Random.Range(0, spawners.Count);
-                transform.position = spawners[spawner].position;
-                transform.rotation = spawners[spawner].rotation;
+                spawners[i].gameObject.GetComponent<Spawner>().taken = false;
+            }
+
+            var check = true;
+            while (check)
+            {
+                var spawner = Random.Range(0, spawners.Count);
+                if (!spawners[spawner].gameObject.GetComponent<Spawner>().taken)
+                {
+                    check = false;
+                    transform.position = spawners[spawner].position;
+                    transform.rotation = spawners[spawner].rotation;
+                    spawners[spawner].gameObject.GetComponent<Spawner>().taken = true;
+                }
             }
         }
     }
