@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6926496777619259895}
   - component: {fileID: 6926496777619259892}
   m_Layer: 0
-  m_Name: Mage1
+  m_Name: Mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6926496777619259893}
   m_LocalRotation: {x: -0, y: -0, z: 0.3014871, w: -0.9534703}
   m_LocalPosition: {x: -1.7568748, y: 2.44, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
