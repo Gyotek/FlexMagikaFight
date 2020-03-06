@@ -57,7 +57,7 @@ public class DataCalculator : MonoBehaviour
 
         timeRatio = ((float)averageTurnDuration / (float)data.maxPlayerTurnTime) * 100f;
 
-        timeIndicator = 100 - timeRatio;
+        timeIndicator = (100 - timeRatio) + 10;
 
         Debug.Log("Adaptability rate = " + timeIndicator);
     }
