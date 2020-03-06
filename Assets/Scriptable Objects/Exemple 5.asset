@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01652ad6a6ac48e48adcffd26dc2ab14, type: 3}
-  m_Name: Pattern 4
+  m_Name: Exemple 5
   m_EditorClassIdentifier: 
-  patternID: 1
-  bossPhase: 1
-  addsNumber: 0
+  bossPhase: 2
+  addsNumber: 2
   wallNumber: 0
-  damage: 3
-  bossElement: 2
-  addsElement: 0
+  bossElement: 0
+  addsElement: 2
   addsMoving: 0
   wallsMoving: 0

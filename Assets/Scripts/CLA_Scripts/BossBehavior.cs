@@ -104,9 +104,9 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
-    public void BossLockTarget()
+    public void BreakSpell()
     {
-        //Find a spell property on a mage and add it to the "targets" list
+        
     }
 
     public void TakeDamage(float damage, SpellManager.SpellElement spellElement)
