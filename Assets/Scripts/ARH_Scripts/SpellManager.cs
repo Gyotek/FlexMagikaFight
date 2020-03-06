@@ -165,7 +165,7 @@ public class SpellManager : SerializedMonoBehaviour
         return SpellType.ERROR;
     }
 
-    Button ButtonFinder(SpellElement parameter)
+    public Button ButtonFinder(SpellElement parameter)
     {
         foreach (KeyValuePair<Image, SpellElement> elementCurseur in ElementsCurseurs)
         {
@@ -176,7 +176,7 @@ public class SpellManager : SerializedMonoBehaviour
         }
         return null;
     }
-    Button ButtonFinder(SpellZone parameter)
+    public Button ButtonFinder(SpellZone parameter)
     {
         foreach (KeyValuePair<Image, SpellZone> zoneCurseur in ZoneCurseurs)
         {
@@ -187,7 +187,7 @@ public class SpellManager : SerializedMonoBehaviour
         }
         return null;
     }
-    Button ButtonFinder(SpellType parameter)
+    public Button ButtonFinder(SpellType parameter)
     {
         foreach (KeyValuePair<Image, SpellType> typeCurseur in TypeCurseurs)
         {

@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664c1657f66f7e14089d9ff7d2b75369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: c0ec1dc9bef3dd446b69b1eba1a0c570, type: 2}
+  Event: {fileID: 11400000, guid: b286a13e7c59399488ca9353274b2b34, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -855,7 +855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &498464908
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2558,11 +2558,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlexBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 8115902417654151439, guid: d8884887c076b5d4ba3d7b016a22d850,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8884887c076b5d4ba3d7b016a22d850, type: 3}
