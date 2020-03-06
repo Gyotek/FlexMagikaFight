@@ -229,7 +229,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -251,9 +251,13 @@ MonoBehaviour:
   tr: {fileID: 3245292707064028009}
   sprite: {fileID: 3839079595026005731}
   spellSpeed: 0.8
+  destroyDelay: 1
+  CircleScalling: 10
   isCircle: 0
+  isCircleing: 0
   circle: {fileID: 6506145713944781672}
   isPerforant: 0
+  isBouncing: 0
   bounce: {fileID: 6200000, guid: 21c8079fdad19b74b94009577e78dde0, type: 2}
 --- !u!1 &6506145713944781672
 GameObject:

@@ -7,9 +7,13 @@ public class Spell : MonoBehaviour
     [SerializeField] Rigidbody2D rb = default;
     [SerializeField] Transform tr = default;
     [SerializeField] SpriteRenderer sprite = default;
-    [SerializeField] private float spellSpeed = 4;
+    [SerializeField] private float spellSpeed = 4f;
+    [SerializeField] private float destroyDelay = 1f;
+    [SerializeField] private float CircleScalling = 10f;
+    private Vector3 newScale;
 
     public bool isCircle = false;
+    public bool isCircleing = false;
     [SerializeField] GameObject circle = default;
     public bool isPerforant = false;
     public bool isBouncing = false;
@@ -52,10 +56,11 @@ public class Spell : MonoBehaviour
         switch (SpellManager.instance.actualType)
         {
             case SpellManager.SpellType.Bounce:
+                transform.GetComponent<Collider2D>().isTrigger = false;
                 rb.sharedMaterial = bounce;
                 break;
             case SpellManager.SpellType.Impact:
-                transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f, transform.localScale.z);
+                //transform.localScale = new Vector3(transform.localScale.x * 1.5f, transform.localScale.y * 1.5f, transform.localScale.z);
                 break;
             case SpellManager.SpellType.Perforant:
                 isPerforant = true;
@@ -68,6 +73,15 @@ public class Spell : MonoBehaviour
         Vector2 mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 dir = (mousePos - pos);
         rb.AddForce(dir * spellSpeed * 100);
+    }
+
+    private void Update()
+    {
+        if (isCircleing)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, newScale, 0.1f);
+            StartCoroutine(DestroyCoroutine());
+        }
     }
 
     void MakeDamage(Transform cible)
@@ -94,15 +108,34 @@ public class Spell : MonoBehaviour
                 damage *= 0.5f;
                 break;
         }
-        cible.GetComponent<BossBehavior>().TakeDamage(damage, SpellManager.instance.actualElement);
+        if (cible.GetComponent<BossBehavior>())
+            cible.GetComponent<BossBehavior>().TakeDamage(damage, SpellManager.instance.actualElement);
+        else if (cible.GetComponent<AddBehavior>())
+            cible.GetComponent<AddBehavior>().TakeDamage(damage, SpellManager.instance.actualElement);
+    }
+
+    IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(destroyDelay);
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (rb.sharedMaterial != null)
-        {
             rb.sharedMaterial = null;
-        }
+            transform.GetComponent<Collider2D>().isTrigger = true;
+
+            if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<AddBehavior>())
+            {
+                Transform cible = collision.transform;
+                MakeDamage(cible);
+            }
+
+            isBouncing = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
         if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<AddBehavior>())
         {
@@ -110,20 +143,38 @@ public class Spell : MonoBehaviour
             if (isPerforant)
             {
                 isPerforant = false;
+                MakeDamage(cible);
                 return;
             }
-            
-            if (isCircle)
+            else if (isCircle)
             {
+                rb.velocity = Vector3.zero;
+                newScale = transform.localScale * 10;
+                MakeDamage(cible);
                 isCircle = false;
-                circle.SetActive(true);
+                isCircleing = true;
+                //circle.SetActive(true);
             }
-
-            MakeDamage(cible);
-            if (!isBouncing)
-                Destroy(this.gameObject);
             else
-                isBouncing = false;
+            {
+                rb.velocity = Vector3.zero;
+                MakeDamage(cible);
+                StartCoroutine(DestroyCoroutine());
+            }
+        }
+
+        if (isCircle)
+        {
+            rb.velocity = Vector3.zero;
+            newScale = transform.localScale * 10;
+            isCircle = false;
+            isCircleing = true;
+            //circle.SetActive(true);
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            StartCoroutine(DestroyCoroutine());
         }
     }
 }
