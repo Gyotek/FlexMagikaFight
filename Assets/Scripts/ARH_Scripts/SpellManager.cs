@@ -61,11 +61,11 @@ public class SpellManager : SerializedMonoBehaviour
         if (ElementChecker() != SpellElement.ERROR || ZoneChecker() != SpellZone.ERROR || TypeChecker() != SpellType.ERROR)
             Debug.DrawRay(pos, pos + dir * 100, Color.blue);
 
-        Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
+        //Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
         
         if (Input.GetMouseButtonDown(0) && (ElementChecker() != SpellElement.ERROR && ZoneChecker() != SpellZone.ERROR && TypeChecker() != SpellType.ERROR))
         {
-            Debug.Log("Spell launched");
+            //Debug.Log("Spell launched");
             LaunchSpell();
             isAiming = false;
             StartCoroutine(RaiseNextTurnCoroutine());
@@ -99,7 +99,7 @@ public class SpellManager : SerializedMonoBehaviour
         actualZone = ZoneChecker();
         actualType = TypeChecker();
 
-        Debug.Log("Spell launched");
+        //Debug.Log("Spell launched");
 
         if (actualElement == SpellElement.ERROR || actualZone == SpellZone.ERROR || actualType == SpellType.ERROR)
             return;
@@ -122,7 +122,7 @@ public class SpellManager : SerializedMonoBehaviour
                 break;
         }
 
-        Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
+        //Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
 
         Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
         if (actualZone == SpellZone.Multiple)

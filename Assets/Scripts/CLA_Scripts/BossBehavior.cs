@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossBehavior : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BossBehavior : MonoBehaviour
     public static BossBehavior Instance { get { return _instance; } }
 
     private SpriteRenderer sprRenderer;
+    private RectTransform healthbar;
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class BossBehavior : MonoBehaviour
         }
 
         sprRenderer = GetComponent<SpriteRenderer>();
+        healthbar = GameObject.Find("HealthBar").GetComponent<RectTransform>();
     }
 
 
@@ -52,6 +55,7 @@ public class BossBehavior : MonoBehaviour
         Error = 0
     }
     public BossPhase currentBossPhase = BossPhase.Phase1;
+    public GameEvent onNewPhase;
 
     private List<GameObject> targets;
     private List<GameObject> newAdds = new List<GameObject>();
@@ -65,6 +69,8 @@ public class BossBehavior : MonoBehaviour
 
     private void Update()
     {
+        healthbar.localScale = new Vector3(realHealth/maxHealth, 1f, 1f);
+
         if(realHealth <= 0)
         {
             Debug.Log("Boss is defeated!");
@@ -107,14 +113,18 @@ public class BossBehavior : MonoBehaviour
             case BossPhase.Phase1:
                 if(realHealth <= (maxHealth/3*2))
                 {
+                    Debug.Log("Phase 2!");
                     currentBossPhase = BossPhase.Phase2;
+                    onNewPhase.Raise();
                     GetPattern();
                 }
                 break;
             case BossPhase.Phase2:
                 if(realHealth <= (maxHealth/3))
                 {
+                    Debug.Log("Phase 3!");
                     currentBossPhase = BossPhase.Phase3;
+                    onNewPhase.Raise();
                     GetPattern();
                 }
                 break;
@@ -150,6 +160,8 @@ public class BossBehavior : MonoBehaviour
             newWalls.Add(Instantiate(wall));
             newWalls[i].GetComponent<WallBehavior>().canMove = wallsMoving;
         }
+        newAdds.Clear();
+        newWalls.Clear();
     }
 
     public void BreakSpell()

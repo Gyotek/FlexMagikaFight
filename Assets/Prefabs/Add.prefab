@@ -99,8 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canMove: 0
   element: 0
-  maxHealth: 0
-  realHealth: 0
+  maxHealth: 6
   sprRenderer: {fileID: 0}
 --- !u!58 &5487215662749212472
 CircleCollider2D:

@@ -155,3 +155,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e8b1a7a030546fb4b93a6298078d1c94, type: 2}
   - {fileID: 11400000, guid: 6cbf5c2c4b2c5324fab522cb6d4be325, type: 2}
   currentBossPhase: 1
+  onNewPhase: {fileID: 11400000, guid: 2e2750ac0316d6e4a9893269ed5f576d, type: 2}
