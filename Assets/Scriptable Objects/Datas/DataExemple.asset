@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558aaad431d82f540ba52005081d10da, type: 3}
   m_Name: DataExemple
   m_EditorClassIdentifier: 
-  P1numberOfDifferentSpell: 5
-  P1numberTotalOfSpell: 4
-  P2numberOfSpell: 5
-  P2numberTotalOfSpell: 5
+  P1numberOfDifferentSpell: 2
+  P1numberTotalOfSpell: 8
+  P2numberOfSpell: 3
+  P2numberTotalOfSpell: 10
   P3numberOfSpell: 4
-  P3numberTotalOfSpell: 5
+  P3numberTotalOfSpell: 10
   playerTurnTime: 40
   playterTurn: 5
   maxPlayerTurnTime: 10

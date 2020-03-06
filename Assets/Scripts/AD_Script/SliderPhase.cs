@@ -14,13 +14,13 @@ public class SliderPhase : MonoBehaviour
     public Slider adaptability;
     public Slider flexibility;
 
-    public float fillSpeed = 1f; 
+    public float fillSpeed = 0.5f; 
 
 
     public void SliderTime()
     {
 
-        SceneManager.LoadScene("AD_StatScene");
+       // SceneManager.LoadScene("AD_StatScene");
 
         StartCoroutine(SliderDisplay());
 
@@ -28,17 +28,17 @@ public class SliderPhase : MonoBehaviour
 
     public IEnumerator SliderDisplay()
     {
-        new WaitForSeconds(2f);
+       // yield return new WaitForSeconds(2f);
 
-        creativity.value = Mathf.Lerp(0, GetComponent<DataCalculator>().Cf, fillSpeed);
+        creativity.value = Mathf.Lerp(0, calculator.Cf, fillSpeed);
 
-        new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
 
-        transposition.value = Mathf.Lerp(0, GetComponent<DataCalculator>().timeIndicator, fillSpeed);
+        adaptability.value = Mathf.Lerp(0, calculator.timeIndicator, fillSpeed);
 
-        new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
 
-        flexibility.value = Mathf.Lerp(0, GetComponent<DataCalculator>().finalFlex, fillSpeed);
+        flexibility.value = Mathf.Lerp(0, calculator.finalFlex, fillSpeed);
 
         yield break; 
     }

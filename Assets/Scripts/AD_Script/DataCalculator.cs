@@ -8,7 +8,7 @@ public class DataCalculator : MonoBehaviour
 {
 
   
-    public ScriptableObject data;
+    public Data data;
 
     //Creativity 
     public float Cp1;
@@ -32,34 +32,47 @@ public class DataCalculator : MonoBehaviour
     public void CreativityRate()
     {
         // Phase 1
-        Cp1 = (GetComponent<Data>().P1numberOfDifferentSpell / GetComponent<Data>().P1numberTotalOfSpell) * 100;
+        Cp1 = (data.P1numberOfDifferentSpell / data.P1numberTotalOfSpell) * 100;
 
         // Phase 2
-        Cp2 = (GetComponent<Data>().P2numberOfSpell / GetComponent<Data>().P2numberTotalOfSpell) * 100;
+        Cp2 = (data.P2numberOfSpell / data.P2numberTotalOfSpell) * 100;
 
         // Phase 3
-        Cp3 = (GetComponent<Data>().P3numberOfSpell / GetComponent<Data>().P3numberTotalOfSpell) * 100;
+        Cp3 = (data.P3numberOfSpell / data.P3numberTotalOfSpell) * 100;
 
         //Average
         Cf = (Cp1 + Cp2 + Cp3) / 3;
 
+        Debug.Log("Creativity rate = " + Cf);
+
     }
 
-    public void TranspositionRate()
+    public void AdaptabilityRate()
     {
-        averageTurnDuration = (GetComponent<Data>().playerTurnTime / GetComponent<Data>().playterTurn);
+        averageTurnDuration = (data.playerTurnTime / data.playterTurn);
 
-        timeRatio = (averageTurnDuration / GetComponent<Data>().maxPlayerTurnTime) * 100;
+        timeRatio = (averageTurnDuration / data.maxPlayerTurnTime) * 100;
 
         timeIndicator = 100 - timeRatio;
+
+        Debug.Log("Adaptability rate = " + timeIndicator);
     }
 
 
     public void FlexibilityRate()
     {
         finalFlex = (timeIndicator + Cf) / 3;
-
+        Debug.Log("Final Flexibility rate = " + finalFlex);
     }
 
+    public void LaunchCalculation()
+    {
+        CreativityRate();
+        AdaptabilityRate();
+        FlexibilityRate();
+
+
+       
+    }
 
 }
