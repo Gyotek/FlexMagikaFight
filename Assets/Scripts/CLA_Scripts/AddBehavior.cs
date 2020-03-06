@@ -15,6 +15,8 @@ public class AddBehavior : MonoBehaviour
 
     private List<Transform> spawners;
 
+    public int index;
+
     private void Awake()
     {
         spawners = new List<Transform>();
@@ -149,8 +151,10 @@ public class AddBehavior : MonoBehaviour
         realHealth -= damage;
     }
 
+   
     public void DestroySelf()
     {
+        BossBehavior.Instance.newAdds.RemoveAt(index);
         Destroy(this.gameObject);
     }
 }

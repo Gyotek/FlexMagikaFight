@@ -59,8 +59,10 @@ public class BossBehavior : MonoBehaviour
     public GameEvent onBossBeaten;
 
     private List<GameObject> targets;
-    private List<GameObject> newAdds = new List<GameObject>();
+    public List<GameObject> newAdds = new List<GameObject>();
     private List<GameObject> newWalls = new List<GameObject>();
+    [SerializeField]
+    private List<int> spellsToBreak = new List<int>();
 
     private void Start()
     {
@@ -151,18 +153,19 @@ public class BossBehavior : MonoBehaviour
                 break;
         }
 
+        newAdds.Clear();
         for (int i = 0; i < addsNumber; i++)
         {
             newAdds.Add(Instantiate(add));
             newAdds[i].GetComponent<AddBehavior>().canMove = addsMoving;
             newAdds[i].GetComponent<AddBehavior>().element = addsElement;
+            newAdds[i].GetComponent<AddBehavior>().index = i;
         }
         for (int i = 0; i < wallNumber; i++)
         {
             newWalls.Add(Instantiate(wall));
             newWalls[i].GetComponent<WallBehavior>().canMove = wallsMoving;
         }
-        newAdds.Clear();
         newWalls.Clear();
     }
 
@@ -179,47 +182,99 @@ public class BossBehavior : MonoBehaviour
         SpellManager.instance.CroixFinder(SpellManager.SpellZone.Multiple).enabled = false;
     }
 
-    public void BreakSpell()
+    public void CroixBreakSpell()
     {
-        var element = Random.Range(0, 9);
-        switch(element)
+        spellsToBreak.Clear();
+        for (int i = 0; i < newAdds.Count + 1; i++)
         {
-            case 0:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Fire).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Fire).enabled = true;
-                break;
-            case 1:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Water).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Water).enabled = true;
-                break;
-            case 2:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Plant).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Plant).enabled = true;
-                break;
-            case 3:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellType.Bounce).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellType.Bounce).enabled = true;
-                break;
-            case 4:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellType.Impact).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellType.Impact).enabled = true;
-                break;
-            case 5:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellType.Perforant).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellType.Perforant).enabled = true;
-                break;
-            case 6:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Circle).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Circle).enabled = true;
-                break;
-            case 7:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Line).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Line).enabled = true;
-                break;
-            case 8:
-                SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Multiple).enabled = false;
-                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Multiple).enabled = true;
-                break;
+            var check = 1;
+            while (check == 1)
+            {
+                check = 0;
+                var rndm = Random.Range(0, 9);
+                for (int x = 0; x < spellsToBreak.Count - 1; x++)
+                {
+                    if(rndm == spellsToBreak[x])
+                    {
+                        check = 1;
+                    }
+                }
+                if(check != 1)
+                {
+                    spellsToBreak.Add(rndm);
+                }
+            }
+        }
+
+        for (int i = 0; i < spellsToBreak.Count; i++)
+        {
+            switch (spellsToBreak[i])
+            {
+                case 0:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellElement.Fire).enabled = true;
+                    break;
+                case 1:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellElement.Water).enabled = true;
+                    break;
+                case 2:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellElement.Plant).enabled = true;
+                    break;
+                case 3:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellType.Bounce).enabled = true;
+                    break;
+                case 4:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellType.Impact).enabled = true;
+                    break;
+                case 5:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellType.Perforant).enabled = true;
+                    break;
+                case 6:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellZone.Circle).enabled = true;
+                    break;
+                case 7:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellZone.Line).enabled = true;
+                    break;
+                case 8:
+                    SpellManager.instance.CroixFinder(SpellManager.SpellZone.Multiple).enabled = true;
+                    break;
+            }
+        }
+    }
+
+    public void ButtonBreakSpell()
+    {
+        for (int i = 0; i < spellsToBreak.Count; i++)
+        {
+            switch (spellsToBreak[i])
+            {
+                case 0:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Fire).enabled = false;
+                    break;
+                case 1:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Water).enabled = false;
+                    break;
+                case 2:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Plant).enabled = false;
+                    break;
+                case 3:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellType.Bounce).enabled = false;
+                    break;
+                case 4:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellType.Impact).enabled = false;
+                    break;
+                case 5:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellType.Perforant).enabled = false;
+                    break;
+                case 6:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Circle).enabled = false;
+                    break;
+                case 7:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Line).enabled = false;
+                    break;
+                case 8:
+                    SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Multiple).enabled = false;
+                    break;
+            }
         }
     }
 
