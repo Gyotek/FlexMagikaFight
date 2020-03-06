@@ -20,7 +20,7 @@ public class SliderPhase : MonoBehaviour
     public void SliderTime()
     {
 
-       // SceneManager.LoadScene("AD_StatScene");
+       //SceneManager.LoadScene("AD_StatScene");
 
         StartCoroutine(SliderDisplay());
 
