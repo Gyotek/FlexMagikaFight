@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664c1657f66f7e14089d9ff7d2b75369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 0}
+  Event: {fileID: 11400000, guid: b3916c33c83d6674e9607a84428c7c4f, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -2011,6 +2011,58 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: ElementsCroix
+      Entry: 7
+      Data: 5|System.Collections.Generic.Dictionary`2[[UnityEngine.UI.Image, UnityEngine.UI],[SpellManager+SpellElement,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 6|System.Collections.Generic.ObjectEqualityComparer`1[[UnityEngine.UI.Image,
+        UnityEngine.UI]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ZoneCroix
+      Entry: 7
+      Data: 7|System.Collections.Generic.Dictionary`2[[UnityEngine.UI.Image, UnityEngine.UI],[SpellManager+SpellZone,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: TypeCroix
+      Entry: 7
+      Data: 8|System.Collections.Generic.Dictionary`2[[UnityEngine.UI.Image, UnityEngine.UI],[SpellManager+SpellType,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   actualElement: 0
   actualZone: 0
   actualType: 0
@@ -2022,6 +2074,7 @@ MonoBehaviour:
     type: 3}
   multipleLaunchDelay: 0.5
   onNextTurn: {fileID: 11400000, guid: c0ec1dc9bef3dd446b69b1eba1a0c570, type: 2}
+  onGameStart: {fileID: 11400000, guid: ca2c49378449e444cba12fc21a841c46, type: 2}
   data: {fileID: 11400000, guid: 20d353f995946cc4a833d2dbe65cf14d, type: 2}
 --- !u!1 &1262526970
 GameObject:

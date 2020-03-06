@@ -30,6 +30,10 @@ public class SpellManager : SerializedMonoBehaviour
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
     public Dictionary<Image, SpellType> TypeCurseurs = new Dictionary<Image, SpellType>();
 
+    public Dictionary<Image, SpellElement> ElementsCroix = new Dictionary<Image, SpellElement>();
+    public Dictionary<Image, SpellZone> ZoneCroix = new Dictionary<Image, SpellZone>();
+    public Dictionary<Image, SpellType> TypeCroix = new Dictionary<Image, SpellType>();
+
     [SerializeField] Data data;
 
     // Start is called before the first frame update
@@ -171,7 +175,39 @@ public class SpellManager : SerializedMonoBehaviour
         }
         return SpellType.ERROR;
     }
-
+    public Image CroixFinder(SpellElement parameter)
+    {
+        foreach (KeyValuePair<Image, SpellElement> elementCroix in ElementsCroix)
+        {
+            if (parameter == elementCroix.Value)
+            {
+                return elementCroix.Key;
+            }
+        }
+        return null;
+    }
+    public Image CroixFinder(SpellZone parameter)
+    {
+        foreach (KeyValuePair<Image, SpellZone> zoneCroix in ZoneCroix)
+        {
+            if (parameter == zoneCroix.Value)
+            {
+                return zoneCroix.Key;
+            }
+        }
+        return null;
+    }
+    public Image CroixFinder(SpellType parameter)
+    {
+        foreach (KeyValuePair<Image, SpellType> typeCroix in TypeCroix)
+        {
+            if (parameter == typeCroix.Value)
+            {
+                return typeCroix.Key;
+            }
+        }
+        return null;
+    }
     public Button ButtonFinder(SpellElement parameter)
     {
         foreach (KeyValuePair<Image, SpellElement> elementCurseur in ElementsCurseurs)
