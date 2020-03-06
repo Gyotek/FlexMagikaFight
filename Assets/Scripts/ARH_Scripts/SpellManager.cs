@@ -165,6 +165,40 @@ public class SpellManager : SerializedMonoBehaviour
         return SpellType.ERROR;
     }
 
+    Button ButtonFinder(SpellElement parameter)
+    {
+        foreach (KeyValuePair<Image, SpellElement> elementCurseur in ElementsCurseurs)
+        {
+            if (parameter == elementCurseur.Value)
+            {
+                return elementCurseur.Key.gameObject.GetComponent<Button>();
+            }
+        }
+        return null;
+    }
+    Button ButtonFinder(SpellZone parameter)
+    {
+        foreach (KeyValuePair<Image, SpellZone> zoneCurseur in ZoneCurseurs)
+        {
+            if (parameter == zoneCurseur.Value)
+            {
+                return zoneCurseur.Key.gameObject.GetComponent<Button>();
+            }
+        }
+        return null;
+    }
+    Button ButtonFinder(SpellType parameter)
+    {
+        foreach (KeyValuePair<Image, SpellType> typeCurseur in TypeCurseurs)
+        {
+            if (parameter == typeCurseur.Value)
+            {
+                return typeCurseur.Key.gameObject.GetComponent<Button>();
+            }
+        }
+        return null;
+    }
+
     public void SetSpellParameter(Text text)
     {
         switch (text.text)
