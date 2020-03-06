@@ -24,7 +24,7 @@ public class SpellManager : SerializedMonoBehaviour
     [SerializeField] GameObject spellPrefab = default;
     [SerializeField] float multipleLaunchDelay = 1.5f;
     [SerializeField] GameEvent onNextTurn;
-
+    LineRenderer lr = default;
     public Dictionary<Image, SpellElement> ElementsCurseurs = new Dictionary<Image, SpellElement>();
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
     public Dictionary<Image, SpellType> TypeCurseurs = new Dictionary<Image, SpellType>();
@@ -32,6 +32,7 @@ public class SpellManager : SerializedMonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lr = GetComponent<LineRenderer>();
     }
 
 
@@ -59,7 +60,7 @@ public class SpellManager : SerializedMonoBehaviour
         Vector2 dir = (mousePos - pos);
 
         if (ElementChecker() != SpellElement.ERROR || ZoneChecker() != SpellZone.ERROR || TypeChecker() != SpellType.ERROR)
-            Debug.DrawRay(pos, pos + dir * 100, Color.blue);
+            RaycastHandler(pos, dir);
 
         Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
         
@@ -70,6 +71,12 @@ public class SpellManager : SerializedMonoBehaviour
             isAiming = false;
             StartCoroutine(RaiseNextTurnCoroutine());
         }
+    }
+    void RaycastHandler(Vector2 pos, Vector2 dir)
+    {
+        //Debug.DrawRay(pos, pos + dir * 500, Color.blue);
+        lr.SetPosition(0, pos);
+        lr.SetPosition(1, dir * 500);
     }
 
     Vector2 LaunchPosChecker()
@@ -92,7 +99,6 @@ public class SpellManager : SerializedMonoBehaviour
         }
         return pos;
     }
-
     public void LaunchSpell()
     {
         actualElement = ElementChecker();
@@ -108,7 +114,6 @@ public class SpellManager : SerializedMonoBehaviour
 
         switch (actualType)
         {
-            
             case SpellType.Impact:
                 pos = spellLauncherM1.position;
                 break;
@@ -117,8 +122,6 @@ public class SpellManager : SerializedMonoBehaviour
                 break;
             case SpellType.Perforant:
                 pos = spellLauncherM3.position;
-                break;
-            default:
                 break;
         }
 
@@ -165,7 +168,7 @@ public class SpellManager : SerializedMonoBehaviour
         return SpellType.ERROR;
     }
 
-    Button ButtonFinder(SpellElement parameter)
+    public Button ButtonFinder(SpellElement parameter)
     {
         foreach (KeyValuePair<Image, SpellElement> elementCurseur in ElementsCurseurs)
         {
@@ -176,7 +179,7 @@ public class SpellManager : SerializedMonoBehaviour
         }
         return null;
     }
-    Button ButtonFinder(SpellZone parameter)
+    public Button ButtonFinder(SpellZone parameter)
     {
         foreach (KeyValuePair<Image, SpellZone> zoneCurseur in ZoneCurseurs)
         {
@@ -187,7 +190,7 @@ public class SpellManager : SerializedMonoBehaviour
         }
         return null;
     }
-    Button ButtonFinder(SpellType parameter)
+    public Button ButtonFinder(SpellType parameter)
     {
         foreach (KeyValuePair<Image, SpellType> typeCurseur in TypeCurseurs)
         {
@@ -260,6 +263,7 @@ public class SpellManager : SerializedMonoBehaviour
         yield return new WaitForSeconds(multipleLaunchDelay);
         Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
     }
+
     IEnumerator RaiseNextTurnCoroutine()
     {
         yield return new WaitForSeconds(3);
