@@ -169,6 +169,40 @@ public class SpellManager : SerializedMonoBehaviour
         return SpellType.ERROR;
     }
 
+    public Image CroixFinder(SpellElement parameter)
+    {
+        foreach (KeyValuePair<Image, SpellElement> elementCroix in ElementsCroix)
+        {
+            if (parameter == elementCroix.Value)
+            {
+                return elementCroix.Key;
+            }
+        }
+        return null;
+    }
+    public Image CroixFinder(SpellZone parameter)
+    {
+        foreach (KeyValuePair<Image, SpellZone> zoneCroix in ZoneCroix)
+        {
+            if (parameter == zoneCroix.Value)
+            {
+                return zoneCroix.Key;
+            }
+        }
+        return null;
+    }
+    public Image CroixFinder(SpellType parameter)
+    {
+        foreach (KeyValuePair<Image, SpellType > typeCroix in TypeCroix)
+        {
+            if (parameter == typeCroix.Value)
+            {
+                return typeCroix.Key;
+            }
+        }
+        return null;
+    }
+
     public Button ButtonFinder(SpellElement parameter)
     {
         foreach (KeyValuePair<Image, SpellElement> elementCurseur in ElementsCurseurs)

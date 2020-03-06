@@ -56,6 +56,7 @@ public class BossBehavior : MonoBehaviour
     }
     public BossPhase currentBossPhase = BossPhase.Phase1;
     public GameEvent onNewPhase;
+    public GameEvent onBossBeaten;
 
     private List<GameObject> targets;
     private List<GameObject> newAdds = new List<GameObject>();
@@ -73,6 +74,7 @@ public class BossBehavior : MonoBehaviour
 
         if(realHealth <= 0)
         {
+            onBossBeaten.Raise();
             Debug.Log("Boss is defeated!");
         }
     }
@@ -164,6 +166,19 @@ public class BossBehavior : MonoBehaviour
         newWalls.Clear();
     }
 
+    public void ReInitSpells()
+    {
+        SpellManager.instance.CroixFinder(SpellManager.SpellElement.Fire).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellElement.Water).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellElement.Plant).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellType.Bounce).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellType.Impact).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellType.Perforant).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellZone.Circle).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellZone.Line).enabled = true;
+        SpellManager.instance.CroixFinder(SpellManager.SpellZone.Multiple).enabled = true;
+    }
+
     public void BreakSpell()
     {
         var element = Random.Range(0, 9);
@@ -172,39 +187,47 @@ public class BossBehavior : MonoBehaviour
             case 0:
                 var fire = SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Fire);
                 fire.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Fire).enabled = false;
                 break;
             case 1:
                 var water = SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Water);
                 water.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Water).enabled = false;
                 break;
             case 2:
                 var plant = SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Plant);
                 plant.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Plant).enabled = false;
                 break;
             case 3:
                 var bounce = SpellManager.instance.ButtonFinder(SpellManager.SpellType.Bounce);
                 bounce.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellType.Bounce).enabled = false;
                 break;
             case 4:
                 var impact = SpellManager.instance.ButtonFinder(SpellManager.SpellType.Impact);
                 impact.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellType.Impact).enabled = false;
                 break;
             case 5:
                 var perfo = SpellManager.instance.ButtonFinder(SpellManager.SpellType.Perforant);
                 perfo.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellType.Perforant).enabled = false;
                 break;
             case 6:
                 var circle = SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Circle);
                 circle.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Circle).enabled = false;
                 break;
             case 7:
                 var line = SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Line);
                 line.enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Line).enabled = false;
                 break;
             case 8:
                 var multi = SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Multiple);
                 multi.enabled = false;
-                //multi.
+                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Multiple).enabled = false;
                 break;
         }
     }
