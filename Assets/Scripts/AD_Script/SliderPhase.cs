@@ -14,7 +14,7 @@ public class SliderPhase : MonoBehaviour
     public Slider adaptability;
     public Slider flexibility;
 
-    public float fillSpeed = 0.5f; 
+    public float fillSpeed = 0.1f; 
 
 
     public void SliderTime()

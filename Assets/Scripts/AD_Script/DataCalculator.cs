@@ -32,14 +32,18 @@ public class DataCalculator : MonoBehaviour
     public void CreativityRate()
     {
         // Phase 1
-        Cp1 = (data.P1numberOfDifferentSpell / data.P1numberTotalOfSpell) * 100;
+        Cp1 = ((float)data.P1numberOfDifferentSpell / (float)data.P1numberTotalOfSpell) * 100f;
+
+        Debug.Log("DifferentSpell = " + data.P1numberOfDifferentSpell);
+        Debug.Log("TotalSpell = " + data.P1numberTotalOfSpell);
+        Debug.Log("Cp1 = " + Cp1);
 
         // Phase 2
-        Cp2 = (data.P2numberOfSpell / data.P2numberTotalOfSpell) * 100;
-
+        Cp2 = ((float)data.P2numberOfDifferentSpell / (float)data.P2numberTotalOfSpell) * 100f;
+        Debug.Log("Cp2 = " + Cp2);
         // Phase 3
-        Cp3 = (data.P3numberOfSpell / data.P3numberTotalOfSpell) * 100;
-
+        Cp3 = ((float)data.P3numberOfDifferentSpell / (float)data.P3numberTotalOfSpell) * 100f;
+        Debug.Log("Cp3 = " + Cp3);
         //Average
         Cf = (Cp1 + Cp2 + Cp3) / 3;
 
@@ -49,9 +53,9 @@ public class DataCalculator : MonoBehaviour
 
     public void AdaptabilityRate()
     {
-        averageTurnDuration = (data.playerTurnTime / data.playterTurn);
+        averageTurnDuration = ((float)data.playerTurnTime / (float)data.playterTurn);
 
-        timeRatio = (averageTurnDuration / data.maxPlayerTurnTime) * 100;
+        timeRatio = ((float)averageTurnDuration / (float)data.maxPlayerTurnTime) * 100f;
 
         timeIndicator = 100 - timeRatio;
 
@@ -69,10 +73,7 @@ public class DataCalculator : MonoBehaviour
     {
         CreativityRate();
         AdaptabilityRate();
-        FlexibilityRate();
-
-
-       
+        FlexibilityRate(); 
     }
 
 }
