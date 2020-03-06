@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: b95facf7258baf24c9a87fbb3c17a205, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   element: 0
   maxHealth: 6
   sprRenderer: {fileID: 0}
+  index: 0
 --- !u!58 &5487215662749212472
 CircleCollider2D:
   m_ObjectHideFlags: 0
