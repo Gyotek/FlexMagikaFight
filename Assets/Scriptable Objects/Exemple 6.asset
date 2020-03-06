@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01652ad6a6ac48e48adcffd26dc2ab14, type: 3}
-  m_Name: Exemple 1
+  m_Name: Exemple 6
   m_EditorClassIdentifier: 
-  bossPhase: 1
+  bossPhase: 3
   addsNumber: 2
-  wallNumber: 0
+  wallNumber: 1
   bossElement: 1
   addsElement: 2
-  addsMoving: 0
+  addsMoving: 1
   wallsMoving: 0

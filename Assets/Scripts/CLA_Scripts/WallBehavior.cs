@@ -70,7 +70,7 @@ public class WallBehavior : MonoBehaviour
 
     public void DestroySelf()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
 

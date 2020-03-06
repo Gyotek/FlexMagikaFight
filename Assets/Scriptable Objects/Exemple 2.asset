@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01652ad6a6ac48e48adcffd26dc2ab14, type: 3}
   m_Name: Exemple 2
   m_EditorClassIdentifier: 
-  patternID: 0
   bossPhase: 1
-  addsNumber: 1
-  wallNumber: 1
-  damage: 1
-  bossElement: 0
+  addsNumber: 0
+  wallNumber: 2
+  bossElement: 2
   addsElement: 0
-  addsMoving: 1
-  wallsMoving: 0
+  addsMoving: 0
+  wallsMoving: 1

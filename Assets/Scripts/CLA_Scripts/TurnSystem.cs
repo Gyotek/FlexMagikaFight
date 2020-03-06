@@ -28,6 +28,8 @@ public class TurnSystem : MonoBehaviour
     public Text turnOwnerText;
     public Animator animator;
 
+    public float timeTaken;
+
     public enum TurnOwner
     {
         Player = 1,
@@ -54,6 +56,12 @@ public class TurnSystem : MonoBehaviour
     private void Update()
     {
         realTurnTime -= Time.deltaTime;
+
+        if (turnOwner == TurnOwner.Player)
+        {
+            timeTaken += Time.deltaTime;
+        }
+
         if (realTurnTime <= 0)
         {
             NextTurn();
@@ -78,9 +86,6 @@ public class TurnSystem : MonoBehaviour
 
             turnOwnerText.text = "Boss Turn!";
             animator.SetTrigger("Boss' Turn");
-
-            //Disable Player's controls
-            //Cast the spell
         }
         else if (turnOwner == TurnOwner.Boss)
         {
@@ -89,10 +94,10 @@ public class TurnSystem : MonoBehaviour
             realTurnTime = playerTurnTime;
             turnCount++;
 
+            timeTaken = 0f;
+
             turnOwnerText.text = "Your Turn!";
             animator.SetTrigger("Player's Turn");
-
-            //Enable Player's controls
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossBehavior : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class BossBehavior : MonoBehaviour
     private static BossBehavior _instance;
 
     public static BossBehavior Instance { get { return _instance; } }
+
+    private SpriteRenderer sprRenderer;
+    private RectTransform healthbar;
 
     private void Awake()
     {
@@ -19,6 +23,9 @@ public class BossBehavior : MonoBehaviour
         {
             _instance = this;
         }
+
+        sprRenderer = GetComponent<SpriteRenderer>();
+        healthbar = GameObject.Find("HealthBar").GetComponent<RectTransform>();
     }
 
 
@@ -48,6 +55,8 @@ public class BossBehavior : MonoBehaviour
         Error = 0
     }
     public BossPhase currentBossPhase = BossPhase.Phase1;
+    public GameEvent onNewPhase;
+    public GameEvent onBossBeaten;
 
     private List<GameObject> targets;
     private List<GameObject> newAdds = new List<GameObject>();
@@ -57,8 +66,17 @@ public class BossBehavior : MonoBehaviour
     {
         realHealth = maxHealth;
         GetPattern();
-        LoadBossPattern();
-        ApplyPattern();
+    }
+
+    private void Update()
+    {
+        healthbar.localScale = new Vector3(realHealth/maxHealth, 1f, 1f);
+
+        if(realHealth <= 0)
+        {
+            onBossBeaten.Raise();
+            Debug.Log("Boss is defeated!");
+        }
     }
 
     private void GetPattern()
@@ -75,6 +93,7 @@ public class BossBehavior : MonoBehaviour
                 currentBossPattern = bossPatterns[Random.Range(6, 9)];
                 break;
         }
+        LoadBossPattern();
     }
 
     private void LoadBossPattern()
@@ -85,11 +104,52 @@ public class BossBehavior : MonoBehaviour
         wallNumber = currentBossPattern.wallNumber;
         addsMoving = currentBossPattern.addsMoving;
         wallsMoving = currentBossPattern.wallsMoving;
+
+        ApplyPattern();
+    }
+
+    public void ChangeBossPhase()
+    {
+        switch (currentBossPhase)
+        {
+            case BossPhase.Phase1:
+                if(realHealth <= (maxHealth/3*2))
+                {
+                    Debug.Log("Phase 2!");
+                    currentBossPhase = BossPhase.Phase2;
+                    onNewPhase.Raise();
+                    GetPattern();
+                }
+                break;
+            case BossPhase.Phase2:
+                if(realHealth <= (maxHealth/3))
+                {
+                    Debug.Log("Phase 3!");
+                    currentBossPhase = BossPhase.Phase3;
+                    onNewPhase.Raise();
+                    GetPattern();
+                }
+                break;
+        }
     }
 
     private void ApplyPattern()
     {
-        //Change Boss' skin
+        switch (bossElement)
+        {
+            case SpellManager.SpellElement.Fire:
+                sprRenderer.color = Color.red;
+                break;
+            case SpellManager.SpellElement.Plant:
+                sprRenderer.color = Color.green;
+                break;
+            case SpellManager.SpellElement.Water:
+                sprRenderer.color = Color.blue;
+                break;
+            case SpellManager.SpellElement.ERROR:
+                sprRenderer.color = Color.grey;
+                break;
+        }
 
         for (int i = 0; i < addsNumber; i++)
         {
@@ -102,11 +162,65 @@ public class BossBehavior : MonoBehaviour
             newWalls.Add(Instantiate(wall));
             newWalls[i].GetComponent<WallBehavior>().canMove = wallsMoving;
         }
+        newAdds.Clear();
+        newWalls.Clear();
     }
 
-    public void BossLockTarget()
+    public void ReInitSpells()
     {
-        //Find a spell property on a mage and add it to the "targets" list
+        SpellManager.instance.CroixFinder(SpellManager.SpellElement.Fire).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellElement.Water).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellElement.Plant).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellType.Bounce).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellType.Impact).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellType.Perforant).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellZone.Circle).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellZone.Line).enabled = false;
+        SpellManager.instance.CroixFinder(SpellManager.SpellZone.Multiple).enabled = false;
+    }
+
+    public void BreakSpell()
+    {
+        var element = Random.Range(0, 9);
+        switch(element)
+        {
+            case 0:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Fire).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Fire).enabled = true;
+                break;
+            case 1:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Water).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Water).enabled = true;
+                break;
+            case 2:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Plant).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellElement.Plant).enabled = true;
+                break;
+            case 3:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellType.Bounce).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellType.Bounce).enabled = true;
+                break;
+            case 4:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellType.Impact).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellType.Impact).enabled = true;
+                break;
+            case 5:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellType.Perforant).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellType.Perforant).enabled = true;
+                break;
+            case 6:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Circle).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Circle).enabled = true;
+                break;
+            case 7:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Line).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Line).enabled = true;
+                break;
+            case 8:
+                SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Multiple).enabled = false;
+                SpellManager.instance.CroixFinder(SpellManager.SpellZone.Multiple).enabled = true;
+                break;
+        }
     }
 
     public void TakeDamage(float damage, SpellManager.SpellElement spellElement)
