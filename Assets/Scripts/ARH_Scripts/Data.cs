@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu]
 public class Data : ScriptableObject
 {
-    //Créativité
+    //Créativité                                        //done
     public int P1numberOfDifferentSpell = 0;
     public int P1numberTotalOfSpell = 0;
 
@@ -49,15 +49,15 @@ public class Data : ScriptableObject
 
     //Adaptabilité
     public float playerTurnTime = 0f;
-    public void addPlayerTurnTime(float value)  => playerTurnTime += value;
+    public void addPlayerTurnTime()  => playerTurnTime += TurnSystem.Instance.playerTurnTime; //done
 
     public int playterTurn = 0;
     public void addPlayerTurn()                 => playterTurn++; //done
 
     public float maxPlayerTurnTime = 0f;
-    public void setMaxPlayerTurnTime()=> maxPlayerTurnTime = TurnSystem.Instance.playerTurnTime;
+    public void setMaxPlayerTurnTime()          => maxPlayerTurnTime = TurnSystem.Instance.playerTurnTime; //done
 
-    public void ResetValue()
+    public void ResetValue() //done
     {
         P1numberOfDifferentSpell = 0;
         P1numberTotalOfSpell = 0;

@@ -137,7 +137,7 @@ public class Spell : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<AddBehavior>())
+        if (collision.gameObject.GetComponent<BossBehavior>() || collision.gameObject.GetComponent<AddBehavior>() || collision.gameObject.GetComponent<WallBehavior>())
         {
             Transform cible = collision.transform;
             if (isPerforant)
@@ -178,3 +178,11 @@ public class Spell : MonoBehaviour
         }
     }
 }
+/*
+NullReferenceException: Object reference not set to an instance of an object
+SliderPhase+<SliderDisplay>d__7.MoveNext() (at Assets/Scripts/AD_Script/SliderPhase.cs:33)
+UnityEngine.SetupCoroutine.InvokeMoveNext(System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at<f38c71c86aa64e299d4cea9fb7c715e1>:0)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)
+SliderPhase:SliderTime() (at Assets/Scripts/AD_Script/SliderPhase.cs:25)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2019.3.0f6/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:377)
+*/

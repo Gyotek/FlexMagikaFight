@@ -1520,7 +1520,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1023356405}
+  - component: {fileID: 1023356409}
   - component: {fileID: 1023356404}
+  - component: {fileID: 1023356408}
   - component: {fileID: 1023356407}
   - component: {fileID: 1023356406}
   m_Layer: 0
@@ -1616,6 +1618,71 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 20d353f995946cc4a833d2dbe65cf14d, type: 2}
         m_MethodName: increaseDifferentSpell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1023356408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023356403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664c1657f66f7e14089d9ff7d2b75369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: b286a13e7c59399488ca9353274b2b34, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 20d353f995946cc4a833d2dbe65cf14d, type: 2}
+        m_MethodName: addPlayerTurnTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1023356409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023356403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664c1657f66f7e14089d9ff7d2b75369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ca2c49378449e444cba12fc21a841c46, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 20d353f995946cc4a833d2dbe65cf14d, type: 2}
+        m_MethodName: ResetValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 20d353f995946cc4a833d2dbe65cf14d, type: 2}
+        m_MethodName: setMaxPlayerTurnTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2192,6 +2259,8 @@ MonoBehaviour:
   multipleLaunchDelay: 0.5
   onNextTurn: {fileID: 11400000, guid: c0ec1dc9bef3dd446b69b1eba1a0c570, type: 2}
   onGameStart: {fileID: 11400000, guid: ca2c49378449e444cba12fc21a841c46, type: 2}
+  onSpellLaunched: {fileID: 11400000, guid: 673e470270789964e8bc2a53101b216b, type: 2}
+  onNewSpellLaunched: {fileID: 11400000, guid: 2a81023daed71bb4a9a33dcee1f8e471, type: 2}
   data: {fileID: 11400000, guid: 20d353f995946cc4a833d2dbe65cf14d, type: 2}
 --- !u!1 &1262526970
 GameObject:

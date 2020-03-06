@@ -25,6 +25,8 @@ public class SpellManager : SerializedMonoBehaviour
     [SerializeField] float multipleLaunchDelay = 1.5f;
     [SerializeField] GameEvent onNextTurn;
     [SerializeField] GameEvent onGameStart;
+    [SerializeField] GameEvent onSpellLaunched;
+    [SerializeField] GameEvent onNewSpellLaunched;
     LineRenderer lr = default;
     public Dictionary<Image, SpellElement> ElementsCurseurs = new Dictionary<Image, SpellElement>();
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
@@ -33,6 +35,8 @@ public class SpellManager : SerializedMonoBehaviour
     public Dictionary<Image, SpellElement> ElementsCroix = new Dictionary<Image, SpellElement>();
     public Dictionary<Image, SpellZone> ZoneCroix = new Dictionary<Image, SpellZone>();
     public Dictionary<Image, SpellType> TypeCroix = new Dictionary<Image, SpellType>();
+
+    List<string> spellsTested = new List<string>();
 
     [SerializeField] Data data;
 
@@ -113,6 +117,7 @@ public class SpellManager : SerializedMonoBehaviour
         actualZone = ZoneChecker();
         actualType = TypeChecker();
 
+
         Debug.Log("Spell launched");
 
         if (actualElement == SpellElement.ERROR || actualZone == SpellZone.ERROR || actualType == SpellType.ERROR)
@@ -134,11 +139,35 @@ public class SpellManager : SerializedMonoBehaviour
         }
 
         Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
-
+        onSpellLaunched.Raise();
+        ListSpellsTested(actualElement.ToString() + actualZone.ToString() + actualType.ToString());
         Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
         if (actualZone == SpellZone.Multiple)
         {
             StartCoroutine(SecondMultipleLaunch(pos));
+        }
+    }
+
+    void RestSpellsTested()
+    {
+        spellsTested.Clear();
+    }
+    void ListSpellsTested(string spell)
+    {
+        bool alreadyIn = false;
+        Debug.Log(spell);
+        for (int i = 0; i < spellsTested.Count; i++)
+        {
+            if (spell == spellsTested[i])
+            {
+                alreadyIn = true;
+            }
+        }
+
+        if (!alreadyIn)
+        {
+            spellsTested.Add(spell);
+            onNewSpellLaunched.Raise();
         }
     }
 
