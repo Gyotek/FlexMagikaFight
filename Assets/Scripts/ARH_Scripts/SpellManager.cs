@@ -71,7 +71,7 @@ public class SpellManager : SerializedMonoBehaviour
         Vector2 mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 dir = (mousePos - pos);
 
-        if (ElementChecker() != SpellElement.ERROR || ZoneChecker() != SpellZone.ERROR || TypeChecker() != SpellType.ERROR)
+        if (ElementChecker() != SpellElement.ERROR && ZoneChecker() != SpellZone.ERROR && TypeChecker() != SpellType.ERROR)
             RaycastHandler(pos, dir);
 
         Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
