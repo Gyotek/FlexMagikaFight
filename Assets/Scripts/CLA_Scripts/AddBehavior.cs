@@ -7,6 +7,9 @@ public class AddBehavior : MonoBehaviour
     public bool canMove;
     public SpellManager.SpellElement element;
 
+    public float maxHealth;
+    public float realHealth;
+
     [SerializeField]
     private SpriteRenderer sprRenderer;
 
@@ -25,6 +28,7 @@ public class AddBehavior : MonoBehaviour
 
     private void Start()
     {
+        realHealth = maxHealth;
         ChangeSkin();
         PlaceOnSpot();
     }
@@ -88,6 +92,56 @@ public class AddBehavior : MonoBehaviour
                 spawners[spawner].gameObject.GetComponent<Spawner>().taken = true;
             }
         }
+    }
+
+    public void TakeDamage(float damage, SpellManager.SpellElement spellElement)
+    {
+        switch (spellElement)
+        {
+            case SpellManager.SpellElement.Fire:
+                switch (element)
+                {
+                    case SpellManager.SpellElement.Fire:
+                        damage *= 1;
+                        break;
+                    case SpellManager.SpellElement.Plant:
+                        damage *= 2;
+                        break;
+                    case SpellManager.SpellElement.Water:
+                        damage *= 0;
+                        break;
+                }
+                break;
+            case SpellManager.SpellElement.Plant:
+                switch (element)
+                {
+                    case SpellManager.SpellElement.Fire:
+                        damage *= 0;
+                        break;
+                    case SpellManager.SpellElement.Plant:
+                        damage *= 1;
+                        break;
+                    case SpellManager.SpellElement.Water:
+                        damage *= 2;
+                        break;
+                }
+                break;
+            case SpellManager.SpellElement.Water:
+                switch (element)
+                {
+                    case SpellManager.SpellElement.Fire:
+                        damage *= 2;
+                        break;
+                    case SpellManager.SpellElement.Plant:
+                        damage *= 0;
+                        break;
+                    case SpellManager.SpellElement.Water:
+                        damage *= 1;
+                        break;
+                }
+                break;
+        }
+        realHealth -= damage;
     }
 
     public void DestroySelf()
