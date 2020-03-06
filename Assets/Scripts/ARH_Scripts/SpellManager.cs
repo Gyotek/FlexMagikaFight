@@ -29,6 +29,10 @@ public class SpellManager : SerializedMonoBehaviour
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
     public Dictionary<Image, SpellType> TypeCurseurs = new Dictionary<Image, SpellType>();
 
+    public Dictionary<Image, SpellElement> ElementsCroix = new Dictionary<Image, SpellElement>();
+    public Dictionary<Image, SpellZone> ZoneCroix = new Dictionary<Image, SpellZone>();
+    public Dictionary<Image, SpellType> TypeCroix = new Dictionary<Image, SpellType>();
+
     // Start is called before the first frame update
     void Start()
     {

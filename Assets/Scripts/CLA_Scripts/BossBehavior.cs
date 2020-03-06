@@ -166,7 +166,47 @@ public class BossBehavior : MonoBehaviour
 
     public void BreakSpell()
     {
-        SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Fire);
+        var element = Random.Range(0, 9);
+        switch(element)
+        {
+            case 0:
+                var fire = SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Fire);
+                fire.enabled = false;
+                break;
+            case 1:
+                var water = SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Water);
+                water.enabled = false;
+                break;
+            case 2:
+                var plant = SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Plant);
+                plant.enabled = false;
+                break;
+            case 3:
+                var bounce = SpellManager.instance.ButtonFinder(SpellManager.SpellType.Bounce);
+                bounce.enabled = false;
+                break;
+            case 4:
+                var impact = SpellManager.instance.ButtonFinder(SpellManager.SpellType.Impact);
+                impact.enabled = false;
+                break;
+            case 5:
+                var perfo = SpellManager.instance.ButtonFinder(SpellManager.SpellType.Perforant);
+                perfo.enabled = false;
+                break;
+            case 6:
+                var circle = SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Circle);
+                circle.enabled = false;
+                break;
+            case 7:
+                var line = SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Line);
+                line.enabled = false;
+                break;
+            case 8:
+                var multi = SpellManager.instance.ButtonFinder(SpellManager.SpellZone.Multiple);
+                multi.enabled = false;
+                //multi.
+                break;
+        }
     }
 
     public void TakeDamage(float damage, SpellManager.SpellElement spellElement)
