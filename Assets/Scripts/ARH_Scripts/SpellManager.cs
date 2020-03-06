@@ -17,10 +17,13 @@ public class SpellManager : SerializedMonoBehaviour
     public SpellZone actualZone = default;
     public SpellType actualType = default;
 
-    [SerializeField] Transform spellLauncher;
-    [SerializeField] bool isAiming = true;
+    [SerializeField] Transform spellLauncherM1;
+    [SerializeField] Transform spellLauncherM2;
+    [SerializeField] Transform spellLauncherM3;
+    [SerializeField] bool isAiming = false;
     [SerializeField] GameObject spellPrefab = default;
     [SerializeField] float multipleLaunchDelay = 1.5f;
+    [SerializeField] GameEvent onNextTurn;
 
     public Dictionary<Image, SpellElement> ElementsCurseurs = new Dictionary<Image, SpellElement>();
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
@@ -29,38 +32,98 @@ public class SpellManager : SerializedMonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        SpellAiming(spellLauncher.position);
+        SpellAiming();
     }
 
-    void SpellAiming(Vector2 pos)
+    public void ResetActual()
+    {
+        actualElement = SpellElement.ERROR;
+        actualZone = SpellZone.ERROR;
+        actualType = SpellType.ERROR;
+    }
+
+    public void SetAiming(bool state) => isAiming = state;
+    void SpellAiming()
     {
         if (!isAiming) return;
 
+        Vector2 pos = LaunchPosChecker();
+
         Vector2 mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 dir = (mousePos - pos);
-        Debug.DrawRay(pos, pos + dir * 100, Color.blue);
+
+        if (ElementChecker() != SpellElement.ERROR || ZoneChecker() != SpellZone.ERROR || TypeChecker() != SpellType.ERROR)
+            Debug.DrawRay(pos, pos + dir * 100, Color.blue);
+
         Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
+        
         if (Input.GetMouseButtonDown(0) && (ElementChecker() != SpellElement.ERROR && ZoneChecker() != SpellZone.ERROR && TypeChecker() != SpellType.ERROR))
         {
             Debug.Log("Spell launched");
-            LaunchSpell(pos);
+            LaunchSpell();
             isAiming = false;
+            StartCoroutine(RaiseNextTurnCoroutine());
         }
     }
 
-    void LaunchSpell(Vector2 pos)
+    Vector2 LaunchPosChecker()
+    {
+        actualType = TypeChecker();
+        Vector2 pos = Vector2.zero;
+
+        switch (actualType)
+        {
+
+            case SpellType.Impact:
+                pos = spellLauncherM1.position;
+                break;
+            case SpellType.Bounce:
+                pos = spellLauncherM2.position;
+                break;
+            case SpellType.Perforant:
+                pos = spellLauncherM3.position;
+                break;
+        }
+        return pos;
+    }
+
+    public void LaunchSpell()
     {
         actualElement = ElementChecker();
         actualZone = ZoneChecker();
         actualType = TypeChecker();
 
+        Debug.Log("Spell launched");
+
+        if (actualElement == SpellElement.ERROR || actualZone == SpellZone.ERROR || actualType == SpellType.ERROR)
+            return;
+
+        Vector2 pos = LaunchPosChecker();
+
+        switch (actualType)
+        {
+            
+            case SpellType.Impact:
+                pos = spellLauncherM1.position;
+                break;
+            case SpellType.Bounce:
+                pos = spellLauncherM2.position;
+                break;
+            case SpellType.Perforant:
+                pos = spellLauncherM3.position;
+                break;
+            default:
+                break;
+        }
+
         Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
+
         Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
         if (actualZone == SpellZone.Multiple)
         {
@@ -162,5 +225,10 @@ public class SpellManager : SerializedMonoBehaviour
     {
         yield return new WaitForSeconds(multipleLaunchDelay);
         Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
+    }
+    IEnumerator RaiseNextTurnCoroutine()
+    {
+        yield return new WaitForSeconds(3);
+        onNextTurn.Raise();
     }
 }

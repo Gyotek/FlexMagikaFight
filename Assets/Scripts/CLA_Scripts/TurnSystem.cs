@@ -66,8 +66,11 @@ public class TurnSystem : MonoBehaviour
     public void NextTurn()
     {
         onNextTurn.Raise();
+    }
 
-        if(turnOwner == TurnOwner.Player)
+    public void TurnNexted()
+    {
+        if (turnOwner == TurnOwner.Player)
         {
             onBossTurnStart.Raise();
             turnOwner = TurnOwner.Boss;
@@ -79,7 +82,7 @@ public class TurnSystem : MonoBehaviour
             //Disable Player's controls
             //Cast the spell
         }
-        else if(turnOwner == TurnOwner.Boss)
+        else if (turnOwner == TurnOwner.Boss)
         {
             onPlayerTurnStart.Raise();
             turnOwner = TurnOwner.Player;
@@ -100,4 +103,5 @@ public class TurnSystem : MonoBehaviour
         if (turnOwner == TurnOwner.Boss) turnTimeSlider.maxValue = bossTurnTime;
         else if (turnOwner == TurnOwner.Player) turnTimeSlider.maxValue = playerTurnTime;
     }
+
 }
