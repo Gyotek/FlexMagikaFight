@@ -49,7 +49,7 @@ public class Data : ScriptableObject
 
     //Adaptabilité
     public float playerTurnTime = 0f;
-    public void addPlayerTurnTime()  => playerTurnTime += TurnSystem.Instance.playerTurnTime; //done
+    public void addPlayerTurnTime()  => playerTurnTime += TurnSystem.Instance.timeTaken; //done
 
     public int playterTurn = 0;
     public void addPlayerTurn()                 => playterTurn++; //done
