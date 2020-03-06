@@ -8,7 +8,7 @@ public class AddBehavior : MonoBehaviour
     public SpellManager.SpellElement element;
 
     public float maxHealth;
-    public float realHealth;
+    private float realHealth;
 
     [SerializeField]
     private SpriteRenderer sprRenderer;
@@ -31,6 +31,11 @@ public class AddBehavior : MonoBehaviour
         realHealth = maxHealth;
         ChangeSkin();
         PlaceOnSpot();
+    }
+
+    private void Update()
+    {
+        if (realHealth <= 0) DestroySelf();
     }
 
     private void ChangeSkin()
@@ -146,6 +151,6 @@ public class AddBehavior : MonoBehaviour
 
     public void DestroySelf()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }

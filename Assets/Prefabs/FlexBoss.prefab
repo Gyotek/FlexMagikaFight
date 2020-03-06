@@ -127,6 +127,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1014613915}
+        m_MethodName: ReInitSpells
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1014613915}
+        m_MethodName: BreakSpell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1014613915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +177,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e8b1a7a030546fb4b93a6298078d1c94, type: 2}
   - {fileID: 11400000, guid: 6cbf5c2c4b2c5324fab522cb6d4be325, type: 2}
   currentBossPhase: 1
+  onNewPhase: {fileID: 11400000, guid: 2e2750ac0316d6e4a9893269ed5f576d, type: 2}
+  onBossBeaten: {fileID: 11400000, guid: 9fdb0c7229dfb4c4b9bd4e0faa3dd364, type: 2}

@@ -24,15 +24,27 @@ public class SpellManager : SerializedMonoBehaviour
     [SerializeField] GameObject spellPrefab = default;
     [SerializeField] float multipleLaunchDelay = 1.5f;
     [SerializeField] GameEvent onNextTurn;
+    [SerializeField] GameEvent onGameStart;
+    [SerializeField] GameEvent onSpellLaunched;
+    [SerializeField] GameEvent onNewSpellLaunched;
     LineRenderer lr = default;
     public Dictionary<Image, SpellElement> ElementsCurseurs = new Dictionary<Image, SpellElement>();
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
     public Dictionary<Image, SpellType> TypeCurseurs = new Dictionary<Image, SpellType>();
 
+    public Dictionary<Image, SpellElement> ElementsCroix = new Dictionary<Image, SpellElement>();
+    public Dictionary<Image, SpellZone> ZoneCroix = new Dictionary<Image, SpellZone>();
+    public Dictionary<Image, SpellType> TypeCroix = new Dictionary<Image, SpellType>();
+
+    List<string> spellsTested = new List<string>();
+
+    [SerializeField] Data data;
+
     // Start is called before the first frame update
     void Start()
     {
         lr = GetComponent<LineRenderer>();
+        onGameStart.Raise();
     }
 
 
@@ -105,6 +117,7 @@ public class SpellManager : SerializedMonoBehaviour
         actualZone = ZoneChecker();
         actualType = TypeChecker();
 
+
         Debug.Log("Spell launched");
 
         if (actualElement == SpellElement.ERROR || actualZone == SpellZone.ERROR || actualType == SpellType.ERROR)
@@ -126,11 +139,35 @@ public class SpellManager : SerializedMonoBehaviour
         }
 
         Debug.Log(ElementChecker() + " + " + ZoneChecker() + " + " + TypeChecker());
-
+        onSpellLaunched.Raise();
+        ListSpellsTested(actualElement.ToString() + actualZone.ToString() + actualType.ToString());
         Instantiate(spellPrefab, new Vector3(pos.x, pos.y, 0), Quaternion.identity);
         if (actualZone == SpellZone.Multiple)
         {
             StartCoroutine(SecondMultipleLaunch(pos));
+        }
+    }
+
+    void RestSpellsTested()
+    {
+        spellsTested.Clear();
+    }
+    void ListSpellsTested(string spell)
+    {
+        bool alreadyIn = false;
+        Debug.Log(spell);
+        for (int i = 0; i < spellsTested.Count; i++)
+        {
+            if (spell == spellsTested[i])
+            {
+                alreadyIn = true;
+            }
+        }
+
+        if (!alreadyIn)
+        {
+            spellsTested.Add(spell);
+            onNewSpellLaunched.Raise();
         }
     }
 
@@ -167,14 +204,46 @@ public class SpellManager : SerializedMonoBehaviour
         }
         return SpellType.ERROR;
     }
-
+    public Image CroixFinder(SpellElement parameter)
+    {
+        foreach (KeyValuePair<Image, SpellElement> elementCroix in ElementsCroix)
+        {
+            if (parameter == elementCroix.Value)
+            {
+                return elementCroix.Key;
+            }
+        }
+        return null;
+    }
+    public Image CroixFinder(SpellZone parameter)
+    {
+        foreach (KeyValuePair<Image, SpellZone> zoneCroix in ZoneCroix)
+        {
+            if (parameter == zoneCroix.Value)
+            {
+                return zoneCroix.Key;
+            }
+        }
+        return null;
+    }
+    public Image CroixFinder(SpellType parameter)
+    {
+        foreach (KeyValuePair<Image, SpellType> typeCroix in TypeCroix)
+        {
+            if (parameter == typeCroix.Value)
+            {
+                return typeCroix.Key;
+            }
+        }
+        return null;
+    }
     public Button ButtonFinder(SpellElement parameter)
     {
         foreach (KeyValuePair<Image, SpellElement> elementCurseur in ElementsCurseurs)
         {
             if (parameter == elementCurseur.Value)
             {
-                return elementCurseur.Key.gameObject.GetComponent<Button>();
+                return elementCurseur.Key.gameObject.GetComponentInParent<Button>();
             }
         }
         return null;
@@ -185,7 +254,7 @@ public class SpellManager : SerializedMonoBehaviour
         {
             if (parameter == zoneCurseur.Value)
             {
-                return zoneCurseur.Key.gameObject.GetComponent<Button>();
+                return zoneCurseur.Key.gameObject.GetComponentInParent<Button>();
             }
         }
         return null;
@@ -196,7 +265,7 @@ public class SpellManager : SerializedMonoBehaviour
         {
             if (parameter == typeCurseur.Value)
             {
-                return typeCurseur.Key.gameObject.GetComponent<Button>();
+                return typeCurseur.Key.gameObject.GetComponentInParent<Button>();
             }
         }
         return null;
