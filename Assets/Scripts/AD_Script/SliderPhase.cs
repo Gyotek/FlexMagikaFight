@@ -14,9 +14,12 @@ public class SliderPhase : MonoBehaviour
     public Slider adaptability;
     public Slider flexibility;
 
-    public float fillSpeed = 0.1f; 
+    public float fillSpeed = 0.1f;
 
-
+    private void Update()
+    {
+       //fillSpeed = +0.5f * Time.deltaTime;
+    }
     public void SliderTime()
     {
 
@@ -28,7 +31,9 @@ public class SliderPhase : MonoBehaviour
 
     public IEnumerator SliderDisplay()
     {
-       // yield return new WaitForSeconds(2f);
+
+        
+       yield return new WaitForSeconds(2f);
 
         creativity.value = Mathf.Lerp(0, calculator.Cf, fillSpeed);
 
