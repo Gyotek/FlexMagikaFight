@@ -9,6 +9,8 @@ public class BossBehavior : MonoBehaviour
 
     public static BossBehavior Instance { get { return _instance; } }
 
+    private SpriteRenderer sprRenderer;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -19,6 +21,8 @@ public class BossBehavior : MonoBehaviour
         {
             _instance = this;
         }
+
+        sprRenderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -57,8 +61,14 @@ public class BossBehavior : MonoBehaviour
     {
         realHealth = maxHealth;
         GetPattern();
-        LoadBossPattern();
-        ApplyPattern();
+    }
+
+    private void Update()
+    {
+        if(realHealth <= 0)
+        {
+            Debug.Log("Boss is defeated!");
+        }
     }
 
     private void GetPattern()
@@ -75,6 +85,7 @@ public class BossBehavior : MonoBehaviour
                 currentBossPattern = bossPatterns[Random.Range(6, 9)];
                 break;
         }
+        LoadBossPattern();
     }
 
     private void LoadBossPattern()
@@ -85,11 +96,48 @@ public class BossBehavior : MonoBehaviour
         wallNumber = currentBossPattern.wallNumber;
         addsMoving = currentBossPattern.addsMoving;
         wallsMoving = currentBossPattern.wallsMoving;
+
+        ApplyPattern();
+    }
+
+    public void ChangeBossPhase()
+    {
+        switch (currentBossPhase)
+        {
+            case BossPhase.Phase1:
+                if(realHealth <= (maxHealth/3*2))
+                {
+                    currentBossPhase = BossPhase.Phase2;
+                    GetPattern();
+                }
+                break;
+            case BossPhase.Phase2:
+                if(realHealth <= (maxHealth/3))
+                {
+                    currentBossPhase = BossPhase.Phase3;
+                    GetPattern();
+                }
+                break;
+        }
     }
 
     private void ApplyPattern()
     {
-        //Change Boss' skin
+        switch (bossElement)
+        {
+            case SpellManager.SpellElement.Fire:
+                sprRenderer.color = Color.red;
+                break;
+            case SpellManager.SpellElement.Plant:
+                sprRenderer.color = Color.green;
+                break;
+            case SpellManager.SpellElement.Water:
+                sprRenderer.color = Color.blue;
+                break;
+            case SpellManager.SpellElement.ERROR:
+                sprRenderer.color = Color.grey;
+                break;
+        }
 
         for (int i = 0; i < addsNumber; i++)
         {
@@ -104,9 +152,9 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
-    public void BossLockTarget()
+    public void BreakSpell()
     {
-        //Find a spell property on a mage and add it to the "targets" list
+        SpellManager.instance.ButtonFinder(SpellManager.SpellElement.Fire);
     }
 
     public void TakeDamage(float damage, SpellManager.SpellElement spellElement)

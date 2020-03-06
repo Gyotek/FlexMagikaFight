@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8115902417654151436}
   - component: {fileID: 1014613914}
   - component: {fileID: 1014613915}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlexBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,16 +112,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664c1657f66f7e14089d9ff7d2b75369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: c0ec1dc9bef3dd446b69b1eba1a0c570, type: 2}
+  Event: {fileID: 11400000, guid: b286a13e7c59399488ca9353274b2b34, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1014613915}
-        m_MethodName: 
+        m_MethodName: ChangeBossPhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -141,17 +141,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wall: {fileID: 6545711886994241242, guid: d8f6058f38c1c6c4bb40138b13bb2d6a, type: 3}
   add: {fileID: 5487215662749212356, guid: 2a4a7e23914d8dd4ab12028ce5a6473a, type: 3}
-  maxHealth: 0
+  maxHealth: 60
   realHealth: 0
   currentBossPattern: {fileID: 0}
   bossPatterns:
   - {fileID: 11400000, guid: 1367cd031b8096a47a5dbc33c05bfd8d, type: 2}
-  - {fileID: 11400000, guid: 6f258ee441a11634ba5983a43f072e31, type: 2}
-  - {fileID: 11400000, guid: 457245e365a30d04f9fac3960330cca3, type: 2}
-  - {fileID: 11400000, guid: b5bf2899d9784774e89a0981c4a1a9ae, type: 2}
-  - {fileID: 11400000, guid: 002287ace91de0743bfa3f266f376255, type: 2}
-  - {fileID: 11400000, guid: 4198bb1f3945fe848ad4ab51301a1483, type: 2}
-  - {fileID: 11400000, guid: 2e594b12a2d47b54b9d62374e052fdd3, type: 2}
-  - {fileID: 11400000, guid: 3de2d7f48c0649d42a8b7c0e39467b4b, type: 2}
-  - {fileID: 11400000, guid: 4c9f4124dbcb7c54891246f38679a58d, type: 2}
+  - {fileID: 11400000, guid: cb11dd7d84fe84949ab5c069412ff9cd, type: 2}
+  - {fileID: 11400000, guid: da2dee102f4d1224b94cd4e0705f23e5, type: 2}
+  - {fileID: 11400000, guid: 1a317d0002f1e164b9bbb96c214c1352, type: 2}
+  - {fileID: 11400000, guid: 3ede7cf624bd48f47985ecd002589625, type: 2}
+  - {fileID: 11400000, guid: 9b3ae8d89ab620a4789d7df473c3b569, type: 2}
+  - {fileID: 11400000, guid: 32cf63897c741c94d91978cac9f692b5, type: 2}
+  - {fileID: 11400000, guid: e8b1a7a030546fb4b93a6298078d1c94, type: 2}
+  - {fileID: 11400000, guid: 6cbf5c2c4b2c5324fab522cb6d4be325, type: 2}
   currentBossPhase: 1
