@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d496517d856ab1489576e152bb20885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthbar: {fileID: 0}
   wall: {fileID: 6545711886994241242, guid: d8f6058f38c1c6c4bb40138b13bb2d6a, type: 3}
   add: {fileID: 5487215662749212356, guid: 2a4a7e23914d8dd4ab12028ce5a6473a, type: 3}
   maxHealth: 60

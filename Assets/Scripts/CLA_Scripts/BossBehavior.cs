@@ -11,7 +11,8 @@ public class BossBehavior : MonoBehaviour
     public static BossBehavior Instance { get { return _instance; } }
 
     private SpriteRenderer sprRenderer;
-    private RectTransform healthbar;
+    [SerializeField]
+    private Slider healthbar;
 
     private void Awake()
     {
@@ -25,7 +26,6 @@ public class BossBehavior : MonoBehaviour
         }
 
         sprRenderer = GetComponent<SpriteRenderer>();
-        healthbar = GameObject.Find("HealthBar").GetComponent<RectTransform>();
     }
 
 
@@ -72,7 +72,7 @@ public class BossBehavior : MonoBehaviour
 
     private void Update()
     {
-        healthbar.localScale = new Vector3(realHealth/maxHealth, 1f, 1f);
+        healthbar.value = realHealth / maxHealth;
 
         if(realHealth <= 0)
         {
