@@ -16,36 +16,28 @@ public class SliderPhase : MonoBehaviour
 
     public float fillSpeed = 0.1f;
 
+     
+
+    private void Start()
+    {
+        creativity.value = 0f;
+        adaptability.value = 0f;
+        flexibility.value = 0f;
+        calculator.LaunchCalculation();
+
+    }
     private void Update()
     {
-       //fillSpeed = +0.5f * Time.deltaTime;
+        SliderAnimation();
     }
-    public void SliderTime()
+    
+
+    public void SliderAnimation()
     {
-
-       //SceneManager.LoadScene("AD_StatScene");
-
-        StartCoroutine(SliderDisplay());
-
+        creativity.value = Mathf.Lerp(0f, (float)calculator.Cf, fillSpeed);
+        adaptability.value = Mathf.Lerp(0f, (float)calculator.timeIndicator, fillSpeed);
+        flexibility.value = Mathf.Lerp(0f, (float)calculator.finalFlex, fillSpeed);
     }
-
-    public IEnumerator SliderDisplay()
-    {
-
-        
-       yield return new WaitForSeconds(2f);
-
-        creativity.value = Mathf.Lerp(0, calculator.Cf, fillSpeed);
-
-        yield return new WaitForSeconds(2f);
-
-        adaptability.value = Mathf.Lerp(0, calculator.timeIndicator, fillSpeed);
-
-        yield return new WaitForSeconds(2f);
-
-        flexibility.value = Mathf.Lerp(0, calculator.finalFlex, fillSpeed);
-
-        yield break; 
-    }
+    
 
 }
