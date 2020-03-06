@@ -24,15 +24,19 @@ public class SpellManager : SerializedMonoBehaviour
     [SerializeField] GameObject spellPrefab = default;
     [SerializeField] float multipleLaunchDelay = 1.5f;
     [SerializeField] GameEvent onNextTurn;
+    [SerializeField] GameEvent onGameStart;
     LineRenderer lr = default;
     public Dictionary<Image, SpellElement> ElementsCurseurs = new Dictionary<Image, SpellElement>();
     public Dictionary<Image, SpellZone> ZoneCurseurs = new Dictionary<Image, SpellZone>();
     public Dictionary<Image, SpellType> TypeCurseurs = new Dictionary<Image, SpellType>();
 
+    [SerializeField] Data data;
+
     // Start is called before the first frame update
     void Start()
     {
         lr = GetComponent<LineRenderer>();
+        onGameStart.Raise();
     }
 
 
@@ -174,7 +178,7 @@ public class SpellManager : SerializedMonoBehaviour
         {
             if (parameter == elementCurseur.Value)
             {
-                return elementCurseur.Key.gameObject.GetComponent<Button>();
+                return elementCurseur.Key.gameObject.GetComponentInParent<Button>();
             }
         }
         return null;
@@ -185,7 +189,7 @@ public class SpellManager : SerializedMonoBehaviour
         {
             if (parameter == zoneCurseur.Value)
             {
-                return zoneCurseur.Key.gameObject.GetComponent<Button>();
+                return zoneCurseur.Key.gameObject.GetComponentInParent<Button>();
             }
         }
         return null;
@@ -196,7 +200,7 @@ public class SpellManager : SerializedMonoBehaviour
         {
             if (parameter == typeCurseur.Value)
             {
-                return typeCurseur.Key.gameObject.GetComponent<Button>();
+                return typeCurseur.Key.gameObject.GetComponentInParent<Button>();
             }
         }
         return null;
