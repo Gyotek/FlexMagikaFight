@@ -65,7 +65,7 @@ public class DataCalculator : MonoBehaviour
 
     public void FlexibilityRate()
     {
-        finalFlex = (timeIndicator + Cf) / 3;
+        finalFlex = (timeIndicator + Cf) / 2;
         Debug.Log("Final Flexibility rate = " + finalFlex);
     }
 
